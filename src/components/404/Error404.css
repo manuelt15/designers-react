@@ -1,0 +1,127 @@
+
+/* estilos para componente de error 404 */
+
+.e404{
+    width: 100%;
+    max-width: 3000px;
+    min-height: 100vh;
+    background-color: rgb(0, 0, 0);
+
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    margin: auto;
+}
+.e404-star{
+    width: 20%;
+    position: absolute;
+    top: 10%;
+    right: 10%;
+
+    animation: rotate 2s infinite ease both;
+}
+.e404-msj{
+    width: 50%;
+    /* min-height: 50vh; */
+    /* background-color: red; */
+    display: flex;
+    flex-flow: column;
+    justify-content: start;
+    align-items: start;
+    padding: 1rem;
+    gap: 2rem;
+}
+.e404-number{
+    font-family: var(--fontTitu);
+    font-size: 10rem;
+    line-height: 1;
+    color: var(--color2);
+}
+.page-not{
+    font-family: var(--fontText);
+    color: var(--colorBase2);
+    font-size: 5rem;
+    line-height: 1;
+    font-weight: 300;
+
+    transition: color .5s ease;
+}
+.page-not:hover{
+    color: var(--color2);
+    transition: color .5s ease;
+}
+.e404-btn{
+    background-color: var(--color2);
+    color: var(--colorBase3);
+    width: fit-content;
+    font-family: var(--fontBtn1);
+    font-size: 1rem;
+    border-radius: .9rem;
+    padding: .8rem;
+    margin: 0 1rem 0 0;
+    transition: all 0.5s;
+}
+.e404-btn:hover{
+    background-color: var(--color3);
+    box-shadow: 0 0 20px #6fc5ff50;
+    transform: scale(1.1);
+}
+.e404-btn:active{
+    background-color: var(--color1);
+    transition: all 0.25s;
+    box-shadow: none;
+    transform: scale(0.98);
+}
+
+/* responsive */
+
+@media(max-width:540px){
+    .page-not{
+        font-size: 3rem;
+    }
+}
+@media(max-width:430px){
+    .page-not{
+        font-size: 2.5rem;
+    }
+    .e404-star{
+        width: 30%;
+    }
+}
+@media(max-width:414px){
+    .page-not{
+        font-size: 2rem;
+    }
+}
+@media(max-width:375px){
+    .e404{
+        min-height: 150vh;
+    }
+    .page-not{
+        font-size: 2.3rem;
+    }
+    .e404-star{
+        width: 40%;
+    }
+}
+@media(max-width:320px){
+    .page-not{
+        font-size: 2rem;
+    }
+    .e404-star{
+        width: 50%;
+    }
+}
+
+/* animaciones */
+
+@keyframes rotate {
+    0%{
+        transform: rotate(0deg);
+    }
+    100%{
+        transform: rotate(180deg);
+    }
+}
