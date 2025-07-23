@@ -14,7 +14,7 @@ export const Footer = ()=>{
 
                 <div className="footer-wrapper-inside">
                     <div className="info">
-                        <div className="social">EXPLORE</div>
+                        <div className="social">👀​</div>
                         <div className="social">FAQ</div>
                         <div className="social">ALWAYS DESIGN</div>
                     </div>    
@@ -23,7 +23,7 @@ export const Footer = ()=>{
                 <div className="footer-wrapper-inside">
                     <div className="info">
                         <div className="social tittle">FOLLOW</div>
-                        <a href="https://www.instagram.com/manueltorres._/?igsh=MW5mazc0ejVhMjJq&utm_source=qr#" className="social">INTAGRAM</a>
+                        <a href="https://www.instagram.com/manueltorres._/?igsh=MW5mazc0ejVhMjJq&utm_source=qr#" className="social">IG</a>
                         <a href="https://www.linkedin.com/in/manueltorrespro/" className="social">LINKEDIN</a>
                     </div>    
                 </div>    
