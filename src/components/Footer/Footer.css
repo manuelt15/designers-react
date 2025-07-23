@@ -40,6 +40,7 @@
     
 }
 .social{
+    width: fit-content;
     font-size: .9rem;
     margin: .5rem;
     text-align: start;
