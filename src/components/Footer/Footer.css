@@ -61,7 +61,7 @@
 }
 @media(max-width:430px){
     .social{
-        font-size: .7rem;
+        font-size: .5rem;
     }
     .footer-logo{
         font-size: 1.1rem;
@@ -69,7 +69,7 @@
 }
 @media(max-width:425px){
     .social{
-        font-size: .7rem;
+        font-size: .5rem;
     }
 }
 @media(max-width:320px){
