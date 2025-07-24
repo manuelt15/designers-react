@@ -23,14 +23,6 @@ Una aplicación web construida con **React** que implementa un sistema **CRUD** 
 
 ---
 
-src/
-│── components/ # Componentes reutilizables
-│── pages/ # Páginas principales (Home, Edit, Create)
-│── App.jsx # Componente principal
-│── main.jsx # Punto de entrada
-
----
-
 ## 🧪 Scripts disponibles
 
 - `npm run dev` – Inicia el servidor en desarrollo.
