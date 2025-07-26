@@ -9,7 +9,7 @@ Una aplicación web construida con **React** que implementa un sistema **CRUD** 
 - **Crear** nuevos registros mediante formularios.
 - **Leer** y listar datos en tiempo real.
 - **Actualizar** registros existentes.
-- **Eliminar** elementos con confirmación.
+- **Eliminar** elementos.
 - Diseño responsive y fácil de usar.
 - Integración con **API REST** (puedes usar tu propio backend o un mock server).
 
