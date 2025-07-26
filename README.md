@@ -11,7 +11,7 @@ Una aplicación web construida con **React** que implementa un sistema **CRUD** 
 - **Actualizar** registros existentes.
 - **Eliminar** elementos.
 - Diseño responsive y fácil de usar.
-- Integración con **API REST** (puedes usar tu propio backend o un mock server).
+- Integración con **API REST** (puedes usar tu propio backend server).
 
 ---
 
@@ -19,7 +19,7 @@ Una aplicación web construida con **React** que implementa un sistema **CRUD** 
 
 - [React](https://reactjs.org/) con **Vite**
 - [React Router](https://reactrouter.com/) para la navegación
-- **Backend**: API REST (Express, JSON Server u otra)
+- **Backend**: API REST (Express)
 
 ---
 
