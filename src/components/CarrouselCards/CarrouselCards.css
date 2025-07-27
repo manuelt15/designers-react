@@ -99,6 +99,10 @@
     .card-carrousel{
         overflow-x: hidden;
     }
+    .card{
+        width: 180px;
+        min-height: 350px;
+    }
 }
 @media(max-width:1024px){
     .card{
