@@ -88,6 +88,16 @@
         font-size: 1.5rem;
     }
 }
+@media(max-width:1485px){
+    .app-explained{
+        font-size: 2rem;
+        top: 20%;
+    }
+    .home-btn{
+        top: 45%;
+        font-size: 1.5rem;
+    }
+}
 @media(max-width:1480px){
     .app-explained{
         font-size: 2rem;
