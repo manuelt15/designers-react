@@ -112,6 +112,9 @@
     .fondo-home{
         min-height: 160vh;
     }
+    .home-wrapper{
+        min-height: 160vh;
+    }
     .app-explained{
         font-size: 2rem;
         top: 20%;
