@@ -135,7 +135,7 @@
 }
 
 /* responsive */
-@media(max-width:1460px){
+@media(max-width:1480px){
     .explore-img{
         min-height: 1000vh;
     }
