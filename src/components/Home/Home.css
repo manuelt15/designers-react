@@ -126,10 +126,10 @@
 }
 @media(max-width:1280px){
     .fondo-home{
-        min-height: 155vh;
+        min-height: 165vh;
     }
     .home-wrapper{
-        min-height: 155vh;
+        min-height: 165vh;
     }
 }
 @media(max-width:1024px){
