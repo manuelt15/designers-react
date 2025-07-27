@@ -88,8 +88,8 @@
 
 @media(max-width:1440px){
     .card{
-        width: 250px;
-        min-height: 400px;
+        width: 150px;
+        min-height: 300px;
     }
     .card-info{
         font-size: 1.5rem;
@@ -100,8 +100,8 @@
         overflow-x: hidden;
     }
     .card{
-        width: 180px;
-        min-height: 350px;
+        width: 150px;
+        min-height: 300px;
     }
 }
 @media(max-width:1024px){
