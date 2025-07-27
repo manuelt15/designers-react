@@ -135,6 +135,29 @@
 }
 
 /* responsive */
+@media(max-width:1460px){
+    .explore-img{
+        min-height: 1000vh;
+    }
+    .explore-wrapper{
+        min-height: 400vh;
+    }
+    .explore-form{
+        grid-template-columns: repeat(1, 1fr);
+    }
+    .forms h2{
+        font-size: 2.5rem;
+    }
+    .explore-section{
+        top: 3%;
+    }
+    .forms{
+        flex-flow: column nowrap;
+    }
+    .explore-form{
+        width: 80%;
+    }
+}
 @media(max-width:1440px){
     .explore-img{
         min-height: 1000vh;
