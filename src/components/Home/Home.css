@@ -110,10 +110,10 @@
 }
 @media(max-width:1440px){
     .fondo-home{
-        min-height: 120vh;
+        min-height: 165vh;
     }
     .home-wrapper{
-        min-height: 120vh;
+        min-height: 165vh;
     }
     .app-explained{
         font-size: 2rem;
@@ -122,7 +122,6 @@
     .home-btn{
         top: 35%;
         font-size: 1.5rem;
-        z-index: 10;
     }
 }
 @media(max-width:1280px){
