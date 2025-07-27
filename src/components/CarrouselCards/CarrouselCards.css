@@ -88,8 +88,8 @@
 
 @media(max-width:1440px){
     .card{
-        width: 200px;
-        min-height: 400px;
+        width: 180px;
+        min-height: 350px;
     }
     .card-info{
         font-size: 1.5rem;
