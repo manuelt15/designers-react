@@ -137,6 +137,7 @@
     .home-btn{
         font-size: 1.2rem;
         top: 40%;
+        z-index: 1;
     }
 }
 @media(max-width:1024px){
