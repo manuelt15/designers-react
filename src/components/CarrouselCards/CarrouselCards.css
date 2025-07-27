@@ -95,18 +95,6 @@
         font-size: 1.5rem;
     }
 }
-@media(max-width:1366px){
-    .card-carrousel{
-        overflow-x: hidden;
-    }
-    .card{
-        width: 150px;
-        min-height: 300px;
-    }
-    .card-wrapper{
-        gap: 1rem;
-    }
-}
 @media(max-width:1280px){
     .card-carrousel{
         overflow-x: hidden;
