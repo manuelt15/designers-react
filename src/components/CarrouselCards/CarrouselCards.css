@@ -88,8 +88,8 @@
 
 @media(max-width:1440px){
     .card{
-        width: 150px;
-        min-height: 300px;
+        width: 180px;
+        min-height: 350px;
     }
     .card-info{
         font-size: 1.5rem;
@@ -103,9 +103,6 @@
         width: 180px;
         min-height: 350px;
     }
-    .card-btn{
-        display: none;
-    }
 }
 @media(max-width:1024px){
     .card{
@@ -117,6 +114,9 @@
     }
     .card-carrousel{
         overflow-x: hidden;
+    }
+    .card-btn{
+        display: none;
     }
 }
 @media(max-width:820px){
