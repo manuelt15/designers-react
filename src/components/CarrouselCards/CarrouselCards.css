@@ -103,6 +103,9 @@
         width: 200px;
         min-height: 400px;
     }
+    .card-carrousel{
+        overflow-x: hidden;
+    }
 }
 @media(max-width:1024px){
     .card{
