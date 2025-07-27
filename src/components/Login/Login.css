@@ -158,7 +158,7 @@
 }
 
 /* responsive */
-@media(max-width:1460px){
+@media(max-width:1480px){
     .inicio{
       min-height: 150vh;
     }
