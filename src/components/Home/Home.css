@@ -142,10 +142,10 @@
 }
 @media(max-width:1024px){
     .fondo-home{
-        min-height: 160vh;
+        min-height: 150vh;
     }
     .home-wrapper{
-        min-height: 160vh;
+        min-height: 150vh;
     }
     .app-explained{
         top: 15%;
