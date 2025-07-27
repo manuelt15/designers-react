@@ -110,10 +110,10 @@
 }
 @media(max-width:1440px){
     .fondo-home{
-        min-height: 160vh;
+        min-height: 165vh;
     }
     .home-wrapper{
-        min-height: 160vh;
+        min-height: 165vh;
     }
     .app-explained{
         font-size: 2rem;
