@@ -108,7 +108,7 @@
         font-size: 1.5rem;
     }
 }
-@media(max-width:1440px){
+@media(max-width:1366px){
     .fondo-home{
         min-height: 165vh;
     }
