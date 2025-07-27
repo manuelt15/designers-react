@@ -100,8 +100,11 @@
         overflow-x: hidden;
     }
     .card{
-        width: 150px;
-        min-height: 300px;
+        width: 180px;
+        min-height: 350px;
+    }
+    .card-btn{
+        display: none;
     }
 }
 @media(max-width:1024px){
