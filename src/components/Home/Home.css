@@ -124,6 +124,22 @@
         font-size: 1.5rem;
     }
 }
+@media(max-width:1285px){
+    .fondo-home{
+        min-height: 165vh;
+    }
+    .home-wrapper{
+        min-height: 165vh;
+    }
+    .app-explained{
+        top: 15%;
+    }
+    .home-btn{
+        font-size: 1.2rem;
+        top: 40%;
+        z-index: 1;
+    }
+}
 @media(max-width:1280px){
     .fondo-home{
         min-height: 165vh;
