@@ -58,6 +58,46 @@
 }
 
 /* responsive */
+@media(max-width:1780px){
+    .app-explained{
+        font-size: 2rem;
+        top: 20%;
+    }
+    .home-btn{
+        top: 45%;
+        font-size: 1.5rem;
+    }
+}
+@media(max-width:1660px){
+    .app-explained{
+        font-size: 2rem;
+        top: 20%;
+    }
+    .home-btn{
+        top: 45%;
+        font-size: 1.5rem;
+    }
+}
+@media(max-width:1560px){
+    .app-explained{
+        font-size: 2rem;
+        top: 20%;
+    }
+    .home-btn{
+        top: 45%;
+        font-size: 1.5rem;
+    }
+}
+@media(max-width:1460px){
+    .app-explained{
+        font-size: 2rem;
+        top: 20%;
+    }
+    .home-btn{
+        top: 45%;
+        font-size: 1.5rem;
+    }
+}
 @media(max-width:1440px){
     .app-explained{
         font-size: 2rem;
