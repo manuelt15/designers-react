@@ -109,6 +109,9 @@
     }
 }
 @media(max-width:1440px){
+    .fondo-home{
+        min-height: 160vh;
+    }
     .app-explained{
         font-size: 2rem;
         top: 20%;
