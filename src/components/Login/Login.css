@@ -158,6 +158,17 @@
 }
 
 /* responsive */
+@media(max-width:1460px){
+    .inicio{
+      min-height: 150vh;
+    }
+    .fondo-inicio{
+      min-height: 150vh;
+    }
+    .mensaje-welcome{
+      font-size: 2rem;
+    }
+}
 @media(max-width:1440px){
   .inicio{
     min-height: 150vh;
