@@ -59,6 +59,12 @@
 
 /* responsive */
 @media(max-width:1780px){
+    .fondo-home{
+        min-height: 165vh;
+    }
+    .home-wrapper{
+        min-height: 165vh;
+    }
     .app-explained{
         font-size: 2rem;
         top: 20%;
@@ -69,6 +75,12 @@
     }
 }
 @media(max-width:1660px){
+    .fondo-home{
+        min-height: 165vh;
+    }
+    .home-wrapper{
+        min-height: 165vh;
+    }
     .app-explained{
         font-size: 2rem;
         top: 20%;
@@ -79,6 +91,12 @@
     }
 }
 @media(max-width:1560px){
+    .fondo-home{
+        min-height: 165vh;
+    }
+    .home-wrapper{
+        min-height: 165vh;
+    }
     .app-explained{
         font-size: 2rem;
         top: 20%;
@@ -89,6 +107,12 @@
     }
 }
 @media(max-width:1485px){
+    .fondo-home{
+        min-height: 165vh;
+    }
+    .home-wrapper{
+        min-height: 165vh;
+    }
     .app-explained{
         font-size: 2rem;
         top: 20%;
@@ -99,6 +123,12 @@
     }
 }
 @media(max-width:1480px){
+    .fondo-home{
+        min-height: 165vh;
+    }
+    .home-wrapper{
+        min-height: 165vh;
+    }
     .app-explained{
         font-size: 2rem;
         top: 20%;
