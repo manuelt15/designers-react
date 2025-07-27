@@ -111,6 +111,12 @@
 }
 
 /* responsive */
+@media(max-width:1460px){
+    .explore-designers{
+        grid-template-columns: repeat(2 , 1fr);
+        top: 8%;
+    }
+}
 @media(max-width:1440px){
     .explore-designers{
         grid-template-columns: repeat(2 , 1fr);
