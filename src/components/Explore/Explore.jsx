@@ -9,7 +9,7 @@ import { CarrouselDesigners } from "../CarrouselDesigners/CarrouselDesigners"
 export const Explore = ()=>{
 
     // importamos elementos del contexto
-    const {getProfiles ,profiles , formPut ,actProfiles ,formAdd , postProfiles} = useContext(DesignerContext)
+    const {getProfiles , formPut ,actProfiles ,formAdd , postProfiles} = useContext(DesignerContext)
 
     // effect para profiles
     useEffect(()=>{
