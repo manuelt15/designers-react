@@ -5,13 +5,10 @@ import './Explore.css'
 import { DesignerContext } from "../Context/DesignersContext"
 import { CarrouselDesigners } from "../CarrouselDesigners/CarrouselDesigners"
 
-// componente de explore
 export const Explore = ()=>{
 
-    // importamos elementos del contexto
     const {getProfiles , formPut ,actProfiles ,formAdd , postProfiles} = useContext(DesignerContext)
 
-    // effect para profiles
     useEffect(()=>{
         getProfiles()
     },[])
@@ -24,13 +21,15 @@ export const Explore = ()=>{
                 <img src="/fondoF.jpg" alt="fondo" className="explore-img" />
 
                 <section className="explore-section">
-                    <h2 className="section-h2">Meet the Designers Behind Our App — Discover the Creative Minds Shaping Your Experience</h2>
+                    <h2 className="section-h2">Meet the Designers Behind Our App</h2>
                         <div className="section-info">
-                            <p className="info-p">Create your personal info card to highlight your skills — or edit your existing one anytime.</p>
+                            <p className="info-p">Create your personal info card or edit your existing one.</p>
                         </div>
                 </section>
 
-        <CarrouselDesigners/>
+                <div className="explore-carrousel">
+                    <CarrouselDesigners/>
+                </div>
 
                 <div className="forms">
                     <h2>Edit your profile</h2>
