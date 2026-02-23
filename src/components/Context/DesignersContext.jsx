@@ -190,6 +190,16 @@ const putProfiles = (_id)=>{
     email.value = find.email
     src.value = find.src
     disponible.checked = find.disponible
+
+    Swal.fire({
+        icon: 'info',
+        title: 'Edit Mode',
+        text: 'Scroll down to edit the profile in the form below.',
+        background: '#000000',
+        color: '#FFFFFF',
+        confirmButtonColor: '#F98A45',
+        confirmButtonText: 'OK'
+    })
 }
 
 // handler para act profiles
