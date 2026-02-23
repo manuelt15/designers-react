@@ -1,57 +1,133 @@
-# React CRUD App
+# Designers App
 
-Una aplicación web construida con **React** que implementa un sistema **CRUD** (Create, Read, Update, Delete) para gestionar datos de forma sencilla.
-
----
-
-## 🚀 Características
-
-- **Crear** nuevos registros mediante formularios.
-- **Leer** y listar datos en tiempo real.
-- **Actualizar** registros existentes.
-- **Eliminar** elementos.
-- Diseño responsive y fácil de usar.
-- Integración con **API REST** (puedes usar tu propio backend server).
+A React 19 + Vite web application for managing designer profiles. Users can create, read, update, and delete designer profiles with a modern, responsive interface.
 
 ---
 
-## 🛠️ Tecnologías utilizadas
+## Features
 
-- [React](https://reactjs.org/) con **Vite**
-- [React Router](https://reactrouter.com/) para la navegación
-- **Backend**: API REST (Express)
-
----
-
-## 🧪 Scripts disponibles
-
-- `npm run dev` – Inicia el servidor en desarrollo.
-- `npm run build` – Crea una build optimizada.
+- **User Authentication**: Login and registration system
+- **Designer Profiles**: Create, read, update, and delete designer profiles
+- **Pagination**: Browse profiles with 4 items per page
+- **User Notifications**: Beautiful notifications using SweetAlert2
+- **Responsive Design**: Works on all device sizes
+- **Navigation**: React Router for seamless page transitions
 
 ---
 
-## ✨ Próximas mejoras
+## Tech Stack
 
-- Validación de formularios.
-- Paginación y filtrado.
-- Manejo avanzado de errores.
-- Test unitarios con Jest.
+- [React 19](https://reactjs.org/) with Vite 7
+- [React Router](https://reactrouter.com/) for navigation
+- [SweetAlert2](https://sweetalert2.github.io/) for user notifications
+- CSS with custom properties for theming
 
 ---
 
-## 📝 Licencia
+## Getting Started
 
-Este proyecto está bajo la licencia MIT. Puedes usarlo libremente.
+### Prerequisites
 
-# React + Vite
+- Node.js 18+ 
+- npm or yarn
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+### Installation
 
-Currently, two official plugins are available:
+```bash
+npm install
+```
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Development
 
-## Expanding the ESLint configuration
+```bash
+npm run dev
+```
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Starts the development server at `http://localhost:5173`
+
+### Production Build
+
+```bash
+npm run build
+```
+
+Creates optimized build in `dist/` folder
+
+### Preview Production Build
+
+```bash
+npm run preview
+```
+
+### Linting
+
+```bash
+npm run lint
+```
+
+---
+
+## Project Structure
+
+```
+src/
+├── components/
+│   ├── 404/              # Error page
+│   ├── Cabecera/         # Navigation header
+│   ├── CarrouselCards/   # Home page carousel
+│   ├── CarrouselDesigners/ # Profiles grid with pagination
+│   ├── Context/          # React Context (DesignersContext)
+│   ├── DesignersApp/     # Login/Register page
+│   ├── Explore/         # Main CRUD page
+│   ├── Footer/          # Footer component
+│   └── Home/            # Home page
+├── pages/               # Page-level components
+├── App.jsx              # Main app with routing
+├── main.jsx             # Entry point
+└── index.css            # Global styles & CSS variables
+```
+
+---
+
+## Routes
+
+| Path | Component | Description |
+|------|-----------|-------------|
+| `/` | DesignersApp | Login/Register page |
+| `/home` | Home | Home page with carousel |
+| `/explore` | Explore | Profiles CRUD with pagination |
+| `/not-found` | Error404 | 404 error page |
+
+---
+
+## Environment Variables
+
+Create a `.env` file in the root directory:
+
+```env
+VITE_EXPRESS=http://localhost:your-port
+```
+
+---
+
+## CSS Variables
+
+The project uses CSS custom properties for theming:
+
+```css
+--colorBase: #000000;      /* Primary background */
+--colorBase2: #61696B;     /* Secondary text */
+--colorBase3: #FFFFFF;     /* Light text */
+--color1: #FF3206;         /* Accent orange */
+--color2: #FF5D00;         /* Secondary accent */
+--color3: #F98A45;         /* Tertiary accent */
+--fontBtn1: "Nunito";      /* Button font */
+--fontText: "Roboto";       /* Body text font */
+--fontTitu: "Bebas Neue";  /* Title font */
+```
+
+---
+
+## License
+
+MIT
