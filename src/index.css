@@ -99,6 +99,11 @@ body {
   font-smooth : always;
   -webkit-font-smoothing : antialiased;
   -moz-osx-font-smoothing : grayscale;
+  background-color : #000000;
+}
+
+html {
+  min-height: 100vh;
 }
 
 
