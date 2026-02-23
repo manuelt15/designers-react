@@ -2,17 +2,19 @@ import { useContext } from 'react'
 import './CarrouselDesigners.css'
 import { DesignerContext } from '../Context/DesignersContext'
 
-// componente de designers
 export const CarrouselDesigners = ()=> {
 
-    // importamos elementos del contexto
-const { profiles , putProfiles , deleteProfiles} = useContext(DesignerContext)
+const { profiles , putProfiles , deleteProfiles, currentPage, nextPage, prevPage, itemsPerPage } = useContext(DesignerContext)
 
+const indexLast = currentPage * itemsPerPage
+const indexFirst = indexLast - itemsPerPage
+const currentProfiles = profiles.slice(indexFirst, indexLast)
+const totalPages = Math.ceil(profiles.length / itemsPerPage)
 
     return(
             <>
                 <div className="explore-designers">
-                    {profiles.length === 0 ? (<p>No profiles found</p>) : profiles?.map(profile =>
+                    {profiles.length === 0 ? (<p>No profiles found</p>) : currentProfiles.map(profile =>
                         <div key={profile._id} {...profile} className="designers-card">
                         <div className="designers-info"> 
                             <img src={profile.src || "/default.jpg"} alt="avatar" className="designers-img" />                           
@@ -30,6 +32,24 @@ const { profiles , putProfiles , deleteProfiles} = useContext(DesignerContext)
                         </div>
                     </div>
                     )}
+                </div>
+
+                <div className="pagination-container">
+                    <button 
+                        className="pagination-btn prev" 
+                        onClick={prevPage}
+                        disabled={currentPage === 1}
+                    >
+                        Prev
+                    </button>
+                    <span className="pagination-info">{currentPage} / {totalPages}</span>
+                    <button 
+                        className="pagination-btn next" 
+                        onClick={nextPage}
+                        disabled={currentPage === totalPages || totalPages === 0}
+                    >
+                        Next
+                    </button>
                 </div>
             </>
     )
