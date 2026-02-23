@@ -1,5 +1,6 @@
 import { createContext, useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 // creamos contexto
 export const DesignerContext = createContext()
@@ -20,6 +21,10 @@ const [noUser , setNoUser] = useState(true)
 
 //state para pedir profiles
 const [profiles , setProfiles] = useState([])
+
+//pagination
+const itemsPerPage = 4
+const [currentPage , setCurrentPage] = useState(1)
 
 //hooks para profiles
 const formPut = useRef()
@@ -188,10 +193,10 @@ const putProfiles = (_id)=>{
 }
 
 // handler para act profiles
-const actProfiles = async (e)=>{
-e.preventDefault()
+const actProfiles = async (e) => {
+    e.preventDefault()
 
-const {identificador , name, age, design , email , disponible , src} = formPut.current
+    const {identificador , name, age, design , email , disponible , src} = formPut.current
 let actProfile = {
     _id : identificador.value,
     name : name.value,
@@ -216,8 +221,28 @@ try {
     let datos = await peticion.json()
     setProfiles(datos.data)
     
+    Swal.fire({
+        icon: 'success',
+        title: 'Updated!',
+        text: 'The profile has been updated successfully.',
+        background: '#000000',
+        color: '#FFFFFF',
+        confirmButtonColor: '#F98A45',
+        confirmButtonText: 'OK'
+    })
+    
+    formPut.current.reset()
 } catch (error) {
    console.log(error.message)
+   Swal.fire({
+        icon: 'error',
+        title: 'Error!',
+        text: 'Failed to update the profile.',
+        background: '#000000',
+        color: '#FFFFFF',
+        confirmButtonColor: '#F98A45',
+        confirmButtonText: 'OK'
+     })
 }
 }
 // handler para post designers
@@ -247,8 +272,29 @@ const postProfiles = async (e)=>{
         let peticion = await fetch(`${VITE_EXPRESS}/profiles` , options)
         let datos = await peticion.json()
         setProfiles(datos.data)
+        
+        Swal.fire({
+            icon: 'success',
+            title: 'Created!',
+            text: 'New profile has been added successfully.',
+            background: '#000000',
+            color: '#FFFFFF',
+            confirmButtonColor: '#F98A45',
+            confirmButtonText: 'OK'
+        })
+        
+        formAdd.current.reset()
     } catch (error) {
         console.log(error.message)
+        Swal.fire({
+            icon: 'error',
+            title: 'Error!',
+            text: 'Failed to add the profile.',
+            background: '#000000',
+            color: '#FFFFFF',
+            confirmButtonColor: '#F98A45',
+            confirmButtonText: 'OK'
+        })
     }
 }
 // handler para delete profiles
@@ -263,14 +309,45 @@ const deleteProfiles = async (_id)=>{
 
     try {
         let peticion = await fetch(`${VITE_EXPRESS}/profiles/${_id}` , options)
-        let datos = await peticion.json()
-        // setProfiles(datos.data) esto me generaba un bug a la hora de ejecutar el `delete`, tenia que refrescar la pagina para ver que si habia borrado solo ese elemento
-        setProfiles(prev => prev.filter(profile => profile._id !== _id)) 
-            // este fue el cambio que logre encontrar con ayuda de chatGPT, entiendo que lo que hizo fue filtrar la lista de profiles y asi devolver una lista nueva completa con el elemento borrado
+        let _datos = await peticion.json()
+        setProfiles(prev => prev.filter(profile => profile._id !== _id))
+        
+        Swal.fire({
+            icon: 'success',
+            title: 'Deleted!',
+            text: 'The profile has been deleted successfully.',
+            background: '#000000',
+            color: '#FFFFFF',
+            confirmButtonColor: '#F98A45',
+            confirmButtonText: 'OK'
+        })
     } catch (error) {
         console.log(error.message)
+        Swal.fire({
+            icon: 'error',
+            title: 'Error!',
+            text: 'Failed to delete the profile.',
+            background: '#000000',
+            color: '#FFFFFF',
+            confirmButtonColor: '#F98A45',
+            confirmButtonText: 'OK'
+        })
     }finally{
         controller.abort()
+    }
+}
+
+// pagination handlers
+const nextPage = () => {
+    const totalPages = Math.ceil(profiles.length / itemsPerPage)
+    if (currentPage < totalPages) {
+        setCurrentPage(currentPage + 1)
+    }
+}
+
+const prevPage = () => {
+    if (currentPage > 1) {
+        setCurrentPage(currentPage - 1)
     }
 }
 
@@ -279,7 +356,7 @@ const deleteProfiles = async (_id)=>{
 
 
 return(
-    <DesignerContext.Provider value={{formLogin , loginUser, setGoodLogin , goodLogin, registerUser, userExist, setUserExist, setUserNew, userNew, formRegister , logOut , next , prev , contador, getProfiles, profiles , formPut , putProfiles , actProfiles , formAdd , postProfiles , deleteProfiles , noUser , setNoUser, navigate}} >
+    <DesignerContext.Provider value={{formLogin , loginUser, setGoodLogin , goodLogin, registerUser, userExist, setUserExist, setUserNew, userNew, formRegister , logOut , next , prev , contador, getProfiles, profiles , formPut , putProfiles , actProfiles , formAdd , postProfiles , deleteProfiles , noUser , setNoUser, navigate, currentPage, nextPage, prevPage, itemsPerPage}} >
         {children}
     </DesignerContext.Provider>
 )
