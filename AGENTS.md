@@ -1,7 +1,7 @@
 # AGENTS.md - Development Guidelines
 
 ## Overview
-This is a React 19 + Vite project with React Router. It uses JavaScript (JSX, not TypeScript).
+This is a React 19 + Vite project with React Router. It's a designer profiles management app with CRUD operations, pagination, and user notifications. Uses JavaScript (JSX, not TypeScript).
 
 ---
 
@@ -34,7 +34,9 @@ src/
 │   ├── ComponentName/
 │   │   ├── ComponentName.jsx
 │   │   └── ComponentName.css
-│   └── Context/      # React Context providers
+│   ├── Context/      # React Context providers
+│   ├── 404/          # Error page
+│   └── ...
 ├── pages/            # Page-level components (Explore.jsx, Home.jsx)
 ├── App.jsx           # Main app with routing
 ├── main.jsx          # Entry point
@@ -131,10 +133,26 @@ const fetchData = async () => {
 - Use `import.meta.env.VITE_*` for Vite environment variables
 - Never commit secrets; use `.env` files (already gitignored)
 
-### Error Handling
+### Error Handling & Notifications
 - Use `console.error` for errors, `console.log` for debugging
 - Show user-friendly error states in UI
+- Use **SweetAlert2** for user notifications (already installed)
 - Use timeout-based state resets for error messages
+
+### SweetAlert2 Usage
+```jsx
+import Swal from "sweetalert2"
+
+Swal.fire({
+    icon: 'success',
+    title: 'Success!',
+    text: 'Operation completed successfully.',
+    background: '#000000',
+    color: '#FFFFFF',
+    confirmButtonColor: '#F98A45',
+    confirmButtonText: 'OK'
+})
+```
 
 ---
 
@@ -148,8 +166,27 @@ Run `npm run lint` before committing.
 
 ---
 
+## Features
+
+### Pagination
+- CarrouselDesigners shows 4 items per page
+- Uses `currentPage`, `itemsPerPage` (4), `nextPage()`, `prevPage()` from context
+
+### User Notifications
+- SweetAlert2 for create/update/delete operations
+- Form reset after successful submission
+
+### Routes
+- `/` - Login page (DesignersApp)
+- `/home` - Home page with carousel
+- `/explore` - Explore page with profiles CRUD
+- `/not-found` - 404 error page
+
+---
+
 ## Additional Notes
 - This is a **JavaScript project** (not TypeScript)
 - Uses React 19 with Vite 7
 - Spanish comments exist in existing code (acceptable but English preferred for new code)
 - No test framework is set up yet
+- Dependencies: react, react-dom, react-router-dom, sweetalert2
