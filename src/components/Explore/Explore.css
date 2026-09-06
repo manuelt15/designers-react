@@ -264,4 +264,14 @@
     .modal-card{
         padding: 16px;
     }
+    .check-box{
+        padding: 8px 0;
+    }
+    .check[type="checkbox"]{
+        width: 22px;
+        height: 22px;
+    }
+    .explore-form .submit{
+        height: 44px;
+    }
 }

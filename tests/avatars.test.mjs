@@ -49,7 +49,9 @@ test('Contexto: postProfiles elige avatar según el checkbox; act conserva src',
     assert.match(src, /src\s*:\s*current\?\.src \|\| ['"]\/default\.jpg['"]/s, 'Al editar conserva el src existente o cae a default')
 })
 
-test('Grid: tarjeta sin src muestra default.jpg', () => {
+test('Grid: src muerto cae a un avatar aleatorio determinístico por id', () => {
     const src = readFileSync(new URL('../src/components/CarrouselDesigners/CarrouselDesigners.jsx', import.meta.url), 'utf8')
-    assert.match(src, /profile\.src \|\| ["']\/default\.jpg["']/)
+    assert.match(src, /resolveAvatar\(profile\)/)
+    assert.match(src, /hash\(/, 'determinístico por id al renderizar')  // el Math.random de crear vive en DesignersContext
+    assert.match(src, /hash\(/, 'determinístico por id al renderizar')
 })

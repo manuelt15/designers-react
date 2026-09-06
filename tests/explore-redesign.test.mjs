@@ -35,13 +35,13 @@ const ctx = (over = {}) => ({
 
 test('Grid: tarjetas en rejilla con imagen, datos y acciones Update/Delete', () => {
     const tree = render('CarrouselDesigners', 'CarrouselDesigners/CarrouselDesigners', ctx({
-        profiles: [{ _id: 'a', name: 'Ada', age: 30, design: 'UX', email: 'ada@x.com', src: '/a.jpg', disponible: true }],
+        profiles: [{ _id: 'a', name: 'Ada', age: 30, design: 'UX', email: 'ada@x.com', src: '/avatar-2.png', disponible: true }],
     }))
     const grid = nodes(tree).find(node => node.props?.className === 'designers-grid')
     assert.ok(grid, 'Falta el grid de tarjetas')
     const cards = nodes(tree).filter(node => node.props?.className === 'designers-card')
     assert.equal(cards.length, 1)
-    assert.ok(nodes(tree).some(node => node.type === 'img' && node.props.src === '/a.jpg'))
+    assert.ok(nodes(tree).some(node => node.type === 'img' && node.props.src === '/avatar-2.png'))
     const buttons = nodes(tree).filter(node => node.type === 'button').map(b => text(b))
     assert.ok(buttons.some(t => /update/i.test(t)) && buttons.some(t => /delete/i.test(t)))
     assert.match(text(tree), /Ada/)

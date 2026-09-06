@@ -83,3 +83,20 @@
         font-size: 14px;
     }
 }
+@media(max-width:430px){
+    .cabecera{
+        padding: 8px 12px;
+        gap: 8px;
+    }
+    .cabecera-ul{
+        gap: 12px;
+    }
+    .cabecera-li a,
+    .cabecera-logout{
+        display: inline-block;
+        padding: 10px 4px;
+    }
+    .cabecera-logout{
+        padding: 10px 8px;
+    }
+}

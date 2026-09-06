@@ -173,4 +173,7 @@
     .designer-btn{
         flex-flow: row nowrap;
     }
+    .card-modify{
+        padding: 10px 8px;
+    }
 }

@@ -2,6 +2,16 @@ import { useContext } from 'react'
 import './CarrouselDesigners.css'
 import { DesignerContext } from '../Context/DesignersContext'
 
+// avatares disponibles; los src que ya no existan caen a un avatar aleatorio determinístico por id
+const AVATARS = ['/avatar-1.png', '/avatar-2.png', '/avatar-3.png', '/avatar-4.png']
+const KNOWN = new Set([...AVATARS, '/default.jpg'])
+const hash = str => [...str].reduce((acc, ch) => (acc * 31 + ch.charCodeAt(0)) >>> 0, 0)
+const resolveAvatar = profile => {
+    const src = profile.src || '/default.jpg'
+    if (KNOWN.has(src)) return src
+    return AVATARS[hash(profile._id || profile.name || 'x') % AVATARS.length]
+}
+
 export const CarrouselDesigners = ()=> {
 
 const { profilesLoading, profilesError, profilesSaving, getProfiles, profiles, putProfiles, deleteProfiles, currentPage, nextPage, prevPage, itemsPerPage, setModal } = useContext(DesignerContext)
@@ -26,7 +36,7 @@ const totalPages = Math.ceil(profiles.length / itemsPerPage)
                 <div className="designers-grid">
                     {currentProfiles.map(profile =>
                         <article key={profile._id} className="designers-card">
-                            <img src={profile.src || "/default.jpg"} alt={`avatar of ${profile.name}`} className="designers-img" />
+                            <img src={resolveAvatar(profile)} alt={`avatar of ${profile.name}`} className="designers-img" />
                             <div className="designers-data">
                                 <span className="field name">{profile.name}</span>
                                 <span className="field">{profile.age} yrs</span>
