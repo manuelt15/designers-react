@@ -68,11 +68,15 @@ test('Profiles: carga pendiente y recuperación tras un error', async () => {
 })
 
 function fillForms(value) {
-    const fields = { reset() {} }
-    for (const name of ['identificador', 'name', 'age', 'design', 'email', 'src']) fields[name] = { value: 'test' }
-    fields.disponible = { checked: true }
-    value.formPut.current = fields
-    value.formAdd.current = fields
+    const put = { reset() {} }
+    for (const name of ['identificador', 'name', 'age', 'design', 'email']) put[name] = { value: 'test' }
+    put.disponible = { checked: true }
+    value.formPut.current = put
+    const add = { reset() {} }
+    for (const name of ['name', 'age', 'design', 'email']) add[name] = { value: 'test' }
+    add.disponible = { checked: true }
+    add.avatarRandom = { checked: false }
+    value.formAdd.current = add
 }
 
 for (const action of ['postProfiles', 'actProfiles', 'deleteProfiles']) {

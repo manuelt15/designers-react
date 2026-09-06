@@ -185,18 +185,20 @@ const actProfiles = async (e) => {
     e.preventDefault()
     if(profileRequest.current) return
 
-    const {identificador , name, age, design , email , disponible , src} = formPut.current
+    const {identificador , name, age, design , email , disponible} = formPut.current
     if(!identificador.value.trim() || !name.value.trim() || !age.value.trim() || !design.value.trim() || !email.value.trim()){
         setNotice('warn', 'missing fields — name, age, design and email are required')
         return
     }
+// conservar la imagen actual del perfil (el modal ya no edita la imagen)
+const current = profiles.find(profile => profile._id === identificador.value)
 let actProfile = {
     _id : identificador.value,
     name : name.value,
     age : age.value,
     design : design.value,
     email : email.value,
-    src : src.value,
+    src : current?.src || '/default.jpg',
     disponible : disponible.checked
 }
  
@@ -235,15 +237,20 @@ const postProfiles = async (e)=>{
     e.preventDefault()
     if(profileRequest.current) return
 
-    const {name , age , src , disponible , email, design} = formAdd.current
+    const {name , age , disponible , email, design, avatarRandom} = formAdd.current
     if(!name.value.trim() || !age.value.trim() || !design.value.trim() || !email.value.trim()){
         setNotice('warn', 'missing fields — name, age, design and email are required')
         return
     }
+    // avatar: aleatorio si el checkbox está marcado, default si no
+    const avatars = ['/avatar-1.png', '/avatar-2.png', '/avatar-3.png', '/avatar-4.png']
+    const avatar = avatarRandom.checked
+        ? avatars[Math.floor(Math.random() * avatars.length)]
+        : '/default.jpg'
     const newProfile = {
         name : name.value,
         age : age.value,
-        src : src.value,
+        src : avatar,
         disponible : disponible.checked,
         email : email.value,
         design: design.value

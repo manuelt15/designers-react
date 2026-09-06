@@ -18,7 +18,7 @@ export const Explore = ()=>{
     // precargar el formulario de edicion cuando se abre el modal
     useEffect(()=>{
         if(modal !== 'edit' || !formPut.current || !editingId) return
-        const {identificador, name, age, design, email, disponible, src} = formPut.current
+        const {identificador, name, age, design, email, disponible} = formPut.current
         const find = profiles.find(profile => profile._id === editingId)
         if(!find) return
         identificador.value = find._id
@@ -26,7 +26,6 @@ export const Explore = ()=>{
         age.value = find.age
         design.value = find.design
         email.value = find.email
-        src.value = find.src || ''
         disponible.checked = find.disponible
         // eslint-disable-next-line react-hooks/exhaustive-deps -- precarga única al abrir el modal
     },[modal, editingId])
@@ -63,11 +62,15 @@ export const Explore = ()=>{
                             <input className="box" type="number" name="age" aria-label="Age" disabled={profilesSaving} placeholder="age" required />
                             <input className="box" type="text" name="design" aria-label="Design specialty" disabled={profilesSaving} placeholder="design" required />
                             <input className="box" type="email" name="email" aria-label="Email" disabled={profilesSaving} placeholder="email" required />
-                            <input className="box" type="text" name="src" aria-label="Profile image path or URL" disabled={profilesSaving} placeholder="image src (optional)" />
 
                             <div className="check-box">
                                 <input className="check" type="checkbox" id="disponibleAdd" name="disponible" disabled={profilesSaving} />
                                 <label className="check" htmlFor="disponibleAdd">available for work</label>
+                            </div>
+
+                            <div className="check-box">
+                                <input className="check" type="checkbox" id="avatarRandom" name="avatarRandom" disabled={profilesSaving} />
+                                <label className="check" htmlFor="avatarRandom">random avatar (unchecked = default)</label>
                             </div>
 
                             <input className="submit" type="submit" value={profilesSaving ? "Saving…" : "Add profile"} disabled={profilesSaving} />
@@ -79,7 +82,6 @@ export const Explore = ()=>{
                             <input className="box" type="number" name="age" aria-label="Age" disabled={profilesSaving} placeholder="age" required />
                             <input className="box" type="text" name="design" aria-label="Design specialty" disabled={profilesSaving} placeholder="design" required />
                             <input className="box" type="email" name="email" aria-label="Email" disabled={profilesSaving} placeholder="email" required />
-                            <input className="box" type="text" name="src" aria-label="Profile image path or URL" disabled={profilesSaving} placeholder="image src (optional)" />
 
                             <div className="check-box">
                                 <input className="check" type="checkbox" id="disponibleX" name="disponible" disabled={profilesSaving} />
