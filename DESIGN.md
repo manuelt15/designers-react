@@ -47,8 +47,8 @@ bracket markers, and one dark "terminal" surface per page.
 | `--mute` | `#646262` | metadata, inactive links, captions |
 | `--ash` | `#9a9898` | disabled text, secondary text on dark |
 
-Legacy tokens (`--colorBase*`, `--color1..3`, `--fontTitu`, …) remain defined
-for un-migrated components only; new work must use the tokens above.
+All legacy tokens (`--colorBase*`, `--color1..3`, `--fontTitu`, …) were removed
+after the full migration; every component uses the tokens above.
 
 ---
 

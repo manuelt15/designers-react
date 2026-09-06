@@ -160,7 +160,7 @@ Swal.fire({
 
 ## ESLint Rules
 The project uses ESLint with these rules:
-- No unused variables (except those starting with uppercase/underscore)
+
 - React Hooks rules enforced
 - React Refresh enabled for HMR
 

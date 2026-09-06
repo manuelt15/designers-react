@@ -3,12 +3,6 @@
   font-family : system-ui, sans-serif;
   scroll-behavior : smooth;
 
-  --fontBtn1 : "Nunito", sans-serif; 
-  --fontBtn2 : "Open Sans", sans-serif;
-  --fontText : "Roboto", sans-serif;
-  --fontTitu : "Bebas Neue", sans-serif;
- 
-
   /* sistema OpenCode: mono + crema + hairlines */
   --fontMono: "JetBrains Mono", "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   --canvas: #fdfcfc;
@@ -27,12 +21,6 @@
   --ash: #9a9898;
   --mute: #646262;
 
-  --colorBase: #000000;
-  --colorBase2 : #61696B;
-  --colorBase3 : #FFFFFF;
-  --color1 : #FF3206;
-  --color2: #FF5D00;
-  --color3: #F98A45;
 }
 * , *::before , *::after {
   margin : 0;
@@ -128,7 +116,7 @@ html {
 
 /* Foco de teclado y estados de interacción */
 :is(a, button, input, [tabindex]):focus-visible {
-  outline: 3px solid var(--color3);
+  outline: 3px solid var(--accent);
   outline-offset: 4px;
 }
 button:disabled, input:disabled {

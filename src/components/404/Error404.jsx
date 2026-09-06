@@ -1,20 +1,16 @@
+import { Link } from 'react-router-dom'
 import './Error404.css'
-import {NavLink} from 'react-router-dom'
 
-// componente para la pagina de error 404
-
+// pagina 404 estilo OpenCode: mono, crema, marcador ASCII
 export const Error404 = ()=>{
 
     return(
-        <>
-            <div className="e404">
-                <img src="/star.webp" alt="" className="e404-star" />
-                <div className="e404-msj">
-                    <div className="e404-number">404</div>
-                    <div className="page-not">The page you were lookin for does not exist</div>
-                    <NavLink className="e404-btn" to={'/home'}>Back home</NavLink>
-                </div>
-            </div>
-        </>
+        <main className="e404">
+            <pre className="e404-art" aria-hidden="true">█▄░█ █░░ █▀▀▄ █▀▀ █▀▀█ █▀▀
+█░▀█ █░░ █▄▄▀ ██▄ █░░█ ▀▀▀</pre>
+            <h1 className="e404-number">[x] 404</h1>
+            <p className="e404-msg">the page you were looking for does not exist</p>
+            <Link className="e404-btn" to="/home">← back home</Link>
+        </main>
     )
 }
