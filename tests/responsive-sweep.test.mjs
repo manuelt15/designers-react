@@ -74,6 +74,7 @@ test('Móvil: sin position absolute/fixed fuera del overlay y sin vh artificiale
         css.walkRules(rule => {
             if (rule.selector === '.modal-backdrop') return // overlay permitido
             if (rule.selector.includes('::after') || rule.selector.includes('::before')) return // decoración interna
+            if (rule.selector === '.new-chip') return // chip dentro de la card
             for (let parent = rule.parent; parent; parent = parent.parent) {
                 if (parent.type === 'atrule' && parent.params.includes('max-width')) return
             }

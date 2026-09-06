@@ -36,6 +36,8 @@ const formAdd = useRef()
 // modal de add/edit: 'add' | 'edit' | null
 const [modal , setModal] = useState(null)
 const [editingId , setEditingId] = useState('')
+// id de la última card añadida (chip 'new'); se reemplaza al añadir otra
+const [newId , setNewId] = useState('')
 const closeModal = ()=> setModal(null)
 
 // notificacion inline autoexpirable: {kind: 'ok'|'error'|'warn', text}
@@ -271,7 +273,11 @@ const postProfiles = async (e)=>{
         if(!peticion.ok) throw new Error('Profile request failed')
         let datos = await peticion.json()
         if(!Array.isArray(datos.data)) throw new Error('Invalid profiles response')
-        setProfiles(datos.data)
+        // la card recién añadida va primera y con chip 'new'
+        const added = datos.data.find(profile => !profiles.some(old => old._id === profile._id))
+        setProfiles(added ? [added, ...datos.data.filter(profile => profile !== added)] : datos.data)
+        setCurrentPage(1)
+        if(added) setNewId(added._id)
         
         setNotice('ok', '[+] profile added')
         
@@ -334,7 +340,7 @@ const prevPage = () => {
 
 
 return(
-    <DesignerContext.Provider value={{formLogin , loginUser, setGoodLogin , goodLogin, registerUser, userExist, setUserExist, setUserNew, userNew, formRegister , logOut , getProfiles, profilesLoading, profilesError, profilesSaving, profiles , formPut , putProfiles , actProfiles , formAdd , postProfiles , deleteProfiles , noUser , setNoUser, navigate, currentPage, nextPage, prevPage, itemsPerPage, modal, setModal, closeModal, editingId, notice}} >
+    <DesignerContext.Provider value={{formLogin , loginUser, setGoodLogin , goodLogin, registerUser, userExist, setUserExist, setUserNew, userNew, formRegister , logOut , getProfiles, profilesLoading, profilesError, profilesSaving, profiles , formPut , putProfiles , actProfiles , formAdd , postProfiles , deleteProfiles , noUser , setNoUser, navigate, currentPage, nextPage, prevPage, itemsPerPage, modal, setModal, closeModal, editingId, notice, newId}} >
         {children}
     </DesignerContext.Provider>
 )

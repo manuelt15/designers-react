@@ -14,7 +14,7 @@ const resolveAvatar = profile => {
 
 export const CarrouselDesigners = ()=> {
 
-const { profilesLoading, profilesError, profilesSaving, getProfiles, profiles, putProfiles, deleteProfiles, currentPage, nextPage, prevPage, itemsPerPage, setModal } = useContext(DesignerContext)
+const { profilesLoading, profilesError, profilesSaving, getProfiles, profiles, putProfiles, deleteProfiles, currentPage, nextPage, prevPage, itemsPerPage, setModal, newId } = useContext(DesignerContext)
 
 if(profilesLoading) return <p className="explore-status" role="status">Loading profiles…</p>
 if(profilesError) return (
@@ -35,7 +35,8 @@ const totalPages = Math.ceil(profiles.length / itemsPerPage)
                 {profiles.length > 0 && (
                 <div className="designers-grid">
                     {currentProfiles.map(profile =>
-                        <article key={profile._id} className="designers-card">
+                        <article key={profile._id} className={`designers-card${profile._id === newId ? ' is-new' : ''}`}>
+                            {profile._id === newId && <span className="new-chip" role="status">new</span>}
                             <img src={resolveAvatar(profile)} alt={`avatar of ${profile.name}`} className="designers-img" />
                             <div className="designers-data">
                                 <span className="field name">{profile.name}</span>

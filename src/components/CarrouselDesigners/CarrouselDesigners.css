@@ -18,6 +18,23 @@
     padding: 16px;
     box-sizing: border-box;
     font-family: var(--fontMono);
+    position: relative;
+}
+.designers-card.is-new{
+    border-color: var(--success);
+}
+.new-chip{
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    font-size: 12px;
+    line-height: 2;
+    font-weight: 700;
+    color: var(--success);
+    border: 1px solid var(--success);
+    border-radius: 4px;
+    padding: 0 8px;
+    background: var(--canvas);
 }
 .designers-img{
     width: 64px;
