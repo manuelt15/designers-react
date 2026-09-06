@@ -3,21 +3,26 @@ import './Cabecera.css'
 import { useContext } from 'react'
 import { DesignerContext } from '../Context/DesignersContext'
 
-// componente de la cabacera
+// cabecera estilo OpenCode: wordmark de texto, enlaces mono y logout como icono
 export const Cabecera = ()=>{
 
-    // importamos elementos del contexto
     const {logOut} = useContext(DesignerContext)
 
-
     return(
-        <nav className='cabecera'>
-            <img src="/logo.png" alt="logo" className="logo-cabecera" />
+        <nav className="cabecera">
+            <NavLink to="/home" className="cabecera-mark">designers_</NavLink>
             <ul className="cabecera-ul">
-            <li className="cabecera-li"><NavLink to="/home">Home</NavLink></li>
-            <li className="cabecera-li"><NavLink to="/explore">Explore</NavLink></li>
+                <li className="cabecera-li"><NavLink to="/home">home</NavLink></li>
+                <li className="cabecera-li"><NavLink to="/explore">explore</NavLink></li>
             </ul>
-            <button className="button-cabecera" onClick={logOut}>Log out</button> 
+            <span
+                className="cabecera-logout"
+                role="button"
+                tabIndex={0}
+                aria-label="Log out"
+                onClick={logOut}
+                onKeyDown={e => { if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); logOut() } }}
+            >[x]</span>
         </nav>
     )
 }

@@ -1,35 +1,28 @@
-import { useContext } from 'react'
 import './Footer.css'
-import { DesignerContext } from '../Context/DesignersContext'
 
-// componente del footer
+// footer estilo OpenCode: filas mono, marcadores ASCII, hairlines
 export const Footer = ()=>{
 
     return(
-        <>
         <footer className="footer">
-
-            <div className="footer-wrapper-one">
-                <div className="footer-logo">NOT FOR DESIGNERS..</div>
-
-                <div className="footer-wrapper-inside">
-                    <div className="info">
-                        <div className="social">👀​</div>
-                        <div className="social">FAQ</div>
-                        <div className="social">ALWAYS DESIGN</div>
-                    </div>    
+            <div className="footer-grid">
+                <div className="footer-row">
+                    <span className="footer-mark">[+]</span>
+                    <span className="footer-label">not for designers_</span>
                 </div>
-
-                <div className="footer-wrapper-inside">
-                    <div className="info">
-                        <div className="social tittle">FOLLOW</div>
-                        <a href="https://www.instagram.com/manueltorres._/?igsh=MW5mazc0ejVhMjJq&utm_source=qr#" className="social">IG</a>
-                        <a href="https://www.linkedin.com/in/manueltorrespro/" className="social">LINKEDIN</a>
-                    </div>    
-                </div>    
+                <div className="footer-row">
+                    <span className="footer-mark">[+]</span>
+                    <a className="footer-link" href="https://www.instagram.com/manueltorres._/?igsh=MW5mazc0ejVhMjJq&utm_source=qr#">instagram</a>
+                </div>
+                <div className="footer-row">
+                    <span className="footer-mark">[+]</span>
+                    <a className="footer-link" href="https://www.linkedin.com/in/manueltorrespro/">linkedin</a>
+                </div>
             </div>
-           
+            <div className="footer-legal">
+                <span>© 2026 not for designers</span>
+                <span>made in madrid</span>
+            </div>
         </footer>
-        </>
     )
 }

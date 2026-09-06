@@ -22,7 +22,7 @@ export const Login = ()=>{
                     <pre className="auth-wordmark">█▄░█ █▀▀ █▀▀▄
 █░▀█ ██▄ █▄▄▀</pre>
                     <p className="auth-prompt">~ designers <span className="cmd">--explore</span></p>
-                    <p className="auth-hints">tab switch · ctrl-p commands</p>
+                    <p className="auth-hints">for designers · and yes, also for you</p>
                 </aside>
                 <form className="auth-form" ref={formLogin} onSubmit={loginUser}>
                     <h1 className="auth-title">Sign in</h1>
