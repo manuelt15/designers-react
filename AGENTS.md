@@ -20,9 +20,9 @@ npm run lint         # Run ESLint on entire project
 ```
 
 ### Testing
-**No test framework is currently configured.** To add tests, consider:
+Tests use the Node built-in runner (no framework dependency):
 ```bash
-npm install vitest @testing-library/react @testing-library/jest-dom jsdom
+node --test tests/
 ```
 
 ---
@@ -37,10 +37,12 @@ src/
 │   ├── Context/      # React Context providers
 │   ├── 404/          # Error page
 │   └── ...
-├── pages/            # Page-level components (Explore.jsx, Home.jsx)
+├── pages/            # Thin page wrappers for the router
 ├── App.jsx           # Main app with routing
 ├── main.jsx          # Entry point
-└── index.css         # Global styles
+└── index.css         # Global reset + design tokens (see DESIGN.md)
+tests/                # node:test suites (CSS contracts + logic)
+DESIGN.md             # Design system reference (OpenCode adaptation)
 ```
 
 ---
@@ -173,13 +175,15 @@ Run `npm run lint` before committing.
 - Uses `currentPage`, `itemsPerPage` (4), `nextPage()`, `prevPage()` from context
 
 ### User Notifications
-- SweetAlert2 for create/update/delete operations
+- SweetAlert2 for create/update/delete/validation operations (dark theme matching the app)
 - Form reset after successful submission
+- Add/Edit live in modals (`role="dialog"`); empty name/age/design/email are rejected before hitting the API
 
 ### Routes
-- `/` - Login page (DesignersApp)
-- `/home` - Home page with carousel
-- `/explore` - Explore page with profiles CRUD
+- `/` - Login page (OpenCode-style split panel)
+- `/register` - Register page (same visual system)
+- `/home` - Home page (dark hero + category marquee)
+- `/explore` - Explore page (profile grid + add/edit modals)
 - `/not-found` - 404 error page
 
 ---
@@ -188,5 +192,6 @@ Run `npm run lint` before committing.
 - This is a **JavaScript project** (not TypeScript)
 - Uses React 19 with Vite 7
 - Spanish comments exist in existing code (acceptable but English preferred for new code)
-- No test framework is set up yet
+- Tests: node:test + postcss + esbuild (dev deps from Vite)
 - Dependencies: react, react-dom, react-router-dom, sweetalert2
+- Design system: OpenCode-inspired, tokens in index.css, documented in DESIGN.md

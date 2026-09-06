@@ -1,185 +1,225 @@
-/* estilos para explore */
-.explore-wrapper {
+/* explore: página mono crema, grid de tarjetas y modal estilo OpenCode */
+
+.explore-wrapper{
     width: 100%;
-    max-width: 3000px;
+    max-width: 1200px;
     margin: auto;
-    position: relative;
-    isolation: isolate;
-    padding-top: 150px;
-    padding-bottom: 2rem;
-    min-height: 100vh;
-}
-
-.explore-img {
-    width: 100%;
-    height: 100%;
-    min-height: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: -1;
-    object-fit: cover;
-}
-
-.explore-section {
-    width: 100%;
-    padding: 2rem;
-    gap: 1rem;
-    text-align: center;
-}
-
-.section-h2 {
-    width: 100%;
-    font-family: var(--fontTitu);
-    font-size: clamp(1.8rem, 4vw, 4rem);
-    font-weight: 500;
-    text-align: center;
-    color: wheat;
-    margin-bottom: 1rem;
-}
-
-.section-info {
-    display: flex;
-    flex-flow: column;
-    justify-content: center;
-    align-items: center;
-    padding: 1rem;
-    margin-bottom: 2rem;
-}
-
-.info-p {
-    width: fit-content;
-    font-family: var(--fontText);
-    font-size: clamp(1.1rem, 2.5vw, 2.5rem);
-    color: var(--colorBase3);
-    text-align: center;
-}
-
-.explore-carrousel {
-    width: 100%;
-    padding: 2rem;
-}
-
-.forms {
-    width: 100%;
-    padding: 2rem;
-    padding-bottom: 4rem;
-    gap: 2rem;
+    padding: 96px 16px;
     display: flex;
     flex-flow: column nowrap;
-    justify-content: center;
-    align-items: center;
+    gap: 48px;
+    font-family: var(--fontMono);
+    color: var(--ink);
+    box-sizing: border-box;
 }
-
-.forms h2 {
-    width: 100%;
-    font-family: var(--fontTitu);
-    font-size: 3rem;
-    color: wheat;
-    text-align: center;
-    margin-bottom: 1rem;
+.explore-section{
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 8px;
 }
-
-.explore-form {
-    width: 100%;
-    max-width: 700px;
-    min-width: 0;
+.section-h2{
+    font-family: var(--fontMono);
+    font-size: 38px;
+    font-weight: 700;
+    line-height: 1.5;
     margin: 0;
-    padding: 1.5rem;
-    gap: 1rem;
+}
+.info-p{
+    font-family: var(--fontMono);
+    font-size: 16px;
+    line-height: 1.5;
+    color: var(--mute);
+    margin: 0;
+}
+
+/* estado de carga / error / vacío */
+.explore-status{
+    font-family: var(--fontMono);
+    font-size: 16px;
+    line-height: 1.5;
+    color: var(--mute);
+    border: 1px solid var(--hairline);
+    border-radius: 4px;
+    background: var(--surfaceSoft);
+    padding: 16px;
+    margin: 0;
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 8px;
+}
+.explore-status button{
+    align-self: flex-start;
+}
+
+/* ---------- modal ---------- */
+.modal-backdrop{
+    position: fixed;
+    inset: 0;
+    background: rgba(32, 29, 29, 0.6);
+    display: grid;
+    place-items: center;
+    padding: 16px;
+    z-index: 10;
+}
+.modal-card{
+    width: 100%;
+    max-width: 560px;
+    background: var(--canvas);
+    border: 1px solid var(--hairline);
+    border-radius: 4px;
+    padding: 24px;
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 16px;
+    font-family: var(--fontMono);
+    color: var(--ink);
+    max-height: calc(100dvh - 32px);
+    overflow-y: auto;
+    box-sizing: border-box;
+}
+.modal-head{
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+}
+.modal-title{
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.5;
+}
+.modal-close{
+    background: transparent;
+    border: 1px solid var(--hairline);
+    border-radius: 4px;
+    font-family: var(--fontMono);
+    font-size: 14px;
+    line-height: 2;
+    color: var(--mute);
+    padding: 2px 8px;
+    cursor: pointer;
+    transition: border-color 150ms, color 150ms;
+}
+@media(hover: hover) and (pointer: fine){
+    .modal-close:hover{
+        border-color: var(--danger);
+        color: var(--danger);
+    }
+}
+.modal-close:active{
+    transform: translateY(1px);
+}
+
+/* ---------- formulario dentro del modal ---------- */
+.explore-form{
+    width: 100%;
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    height: auto;
-    border-radius: 30px;
-    background: #0000007f;
-    box-shadow: -5px -5px 15px #000000c8;
+    gap: 12px;
+    margin: 0;
 }
-
-.box {
+.box{
     width: 100%;
     min-width: 0;
-    text-align: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 1rem;
-    border-radius: 25px;
-    padding: 0.6em;
-    border: none;
-    outline: none;
-    color: var(--colorBase3);
-    background-color: #171717;
-    box-shadow: inset 2px 5px 10px rgb(5, 5, 5);
+    font-family: var(--fontMono);
+    font-size: 16px;
+    line-height: 1.5;
+    text-align: left;
+    color: var(--ink);
+    background: var(--surfaceSoft);
+    border: 1px solid var(--hairline);
+    border-radius: 4px;
+    padding: 8px 12px;
+    height: 40px;
+    box-sizing: border-box;
+    transition: background-color 150ms, border-color 150ms;
 }
-
-.check[type="checkbox"] {
+.box:focus{
+    background: var(--canvas);
+    border-color: var(--ink);
+    outline: none;
+}
+.box:disabled{
+    background: var(--surfaceCard);
+    color: var(--ash);
+}
+.check-box{
+    grid-column: 1 / -1;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--fontMono);
+    font-size: 14px;
+    line-height: 2;
+    color: var(--ink);
+}
+.check[type="checkbox"]{
     appearance: none;
-    width: 20px;
-    height: 20px;
-    border: 2px solid wheat;
-    border-radius: 5px;
-    background-color: transparent;
+    width: 18px;
+    height: 18px;
+    margin: 0;
+    border: 1px solid var(--hairlineStrong);
+    border-radius: 4px;
+    background: var(--surfaceSoft);
     cursor: pointer;
     position: relative;
-    transition: transform 160ms ease-out, background-color 180ms ease, color 180ms ease;
+    transition: background-color 150ms;
 }
-
-.check[type="checkbox"]:checked {
-    background-color: wheat;
+.check[type="checkbox"]:checked{
+    background: var(--ink);
 }
-
-.check[type="checkbox"]:checked::after {
-    content: "✓";
-    color: black;
+.check[type="checkbox"]:checked::after{
+    content: "x";
+    color: var(--canvas);
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    font-size: 1rem;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    font-size: 12px;
+    line-height: 1;
+    font-family: var(--fontMono);
 }
-
-.check:checked + label {
-    color: wheat;
-    font-weight: bold;
-}
-
-.check-box {
-    display: flex;
-    flex-flow: row;
-    justify-content: center;
-    align-items: center;
-    gap: 1rem;
-    color: wheat;
+.explore-form .submit{
     grid-column: 1 / -1;
-}
-
-.explore-form .submit {
-    grid-column: 1 / -1;
-    width: auto;
-    justify-self: center;
-    padding: .8rem 1.5rem;
-}
-.explore-form .check-box {
-    flex-wrap: wrap;
-}
-.explore-status {
     width: 100%;
-    text-align: center;
-    color: wheat;
-    padding: 2rem 1rem;
+    font-family: var(--fontMono);
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 2;
+    background: var(--ink);
+    color: var(--canvas);
+    border: none;
+    border-radius: 4px;
+    padding: 4px 20px;
+    height: 40px;
+    cursor: pointer;
+    transition: background-color 150ms;
 }
-.explore-status button {
-    margin: 1rem auto 0;
+.explore-form .submit:disabled{
+    background: var(--surfaceCard);
+    color: var(--ash);
+    cursor: not-allowed;
 }
+.explore-form .submit:active:not(:disabled){
+    background: var(--inkDeep);
+    transform: translateY(1px);
+}
+
 /* responsive */
-@media(max-width:600px) {
-    .explore-form {
+@media(max-width:640px){
+    .explore-wrapper{
+        padding: 48px 16px;
+        gap: 32px;
+    }
+    .section-h2{
+        font-size: 28px;
+    }
+    .explore-form{
         grid-template-columns: minmax(0, 1fr);
     }
-    .explore-section, .explore-carrousel, .forms {
-        padding: 1rem;
-    }
-    .forms h2 {
-        font-size: 2rem;
+    .modal-card{
+        padding: 16px;
     }
 }

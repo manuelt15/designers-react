@@ -1,25 +1,7 @@
-import { useRef } from 'react'
 import './CarrouselCards.css'
 
-// componente de cards
+// marquesina de categorias estilo OpenCode: cinta continua con separadores ASCII
 export const CarrouselCards = ()=>{
-
-    const cards = useRef()
-
-    const scrollCards = (direction)=>{
-        const track = cards.current
-        const end = track.scrollWidth - track.clientWidth
-        if(direction > 0 && track.scrollLeft >= end - 1){
-            track.scrollTo({left: 0})
-            return
-        }
-        if(direction < 0 && track.scrollLeft <= 1){
-            track.scrollTo({left: end})
-            return
-        }
-        const step = track.children[1].offsetLeft - track.children[0].offsetLeft
-        track.scrollBy({left: direction * step})
-    }
 
     // array para informacion de las cards
     const info = [
@@ -32,19 +14,23 @@ export const CarrouselCards = ()=>{
         {_id: 6, info: 'Front-end'},
         {_id: 7, info: 'And more'},
     ]
-        
+
+    const strip = items => (
+        <div className="marquee-group" aria-hidden={items === info || undefined}>
+            {items.map(item => (
+                <span key={item._id} className="marquee-item">
+                    <span className="marquee-mark">[+]</span> {item.info}
+                </span>
+            ))}
+        </div>
+    )
+
     return(
-        <div className="card-carrousel">
-            <div className="card-wrapper" ref={cards} tabIndex={0} role="region" aria-label="Design categories">
-                {info?.map(inf =>
-                    <div key={inf._id} className="card">
-                        <img src="/star.webp" alt="star" className="card-img" /> 
-                        <span key={inf._id} className="card-info">{inf.info}</span>
-                    </div>
-                )}
+        <div className="marquee" role="region" aria-label="Design categories">
+            <div className="marquee-track">
+                {strip(info)}
+                {strip(info)}
             </div>
-            <button className='card-btn next' onClick={()=> scrollCards(1)}>Next</button>
-            <button className='card-btn prev' onClick={()=> scrollCards(-1)}>Prev</button>
         </div>
     )
 }

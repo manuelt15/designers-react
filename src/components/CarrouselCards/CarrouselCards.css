@@ -1,140 +1,65 @@
+/* marquesina: cinta continua mono, hairlines arriba y abajo, sin imagenes ni botones */
 
-/* estilos para el componente de cards */
-
-.card-carrousel{
+.marquee{
     width: 100%;
-    max-width: 3000px;
-    padding: 1rem;
-    margin: auto;
-    position: relative;
-    min-width: 0;
+    overflow: hidden;
+    border-top: 1px solid var(--hairline);
+    border-bottom: 1px solid var(--hairline);
+    font-family: var(--fontMono);
 }
-.card-wrapper{
-    display: grid;
-    grid-auto-flow: column;
-    grid-auto-columns: max-content;
-    gap: 1rem;
-    width: 100%;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    scroll-behavior: smooth;
-    scrollbar-width: none;
-}
-.card-btn{
-    position: absolute;
-}
-@media(hover: hover) and (pointer: fine){
-.card-btn:hover{
-    background-color: var(--color3);
-    box-shadow: 0 0 20px #6fc5ff50;
-    transform: scale(1.02);
-}
-}
-.card-btn:active{
-    background-color: var(--color1);
-    transition: transform 160ms ease-out, background-color 180ms ease, color 180ms ease;
-    box-shadow: none;
-    transform: scale(0.98);
-}
-.card-btn.next{
-    top: 50%;
-    right: 0%;
-    background-color: var(--color2);
-    color: var(--colorBase3);
-    width: fit-content;
-    font-family: var(--fontBtn1);
-    font-size: 1rem;
-    border-radius: .9rem;
-    padding: .8rem;
-    /* margin: 0 1rem 0 0; */
-    transition: transform 160ms ease-out, background-color 180ms ease, color 180ms ease;
-}
-.card-btn.prev{
-    top: 50%;
-    left: 0%;
-    background-color: var(--color2);
-    color: var(--colorBase3);
-    width: fit-content;
-    font-family: var(--fontBtn1);
-    font-size: 1rem;
-    border-radius: .9rem;
-    padding: .8rem;
-    margin: 0 1rem 0 0;
-    transition: transform 160ms ease-out, background-color 180ms ease, color 180ms ease;
-}
-
-.card{
-    width: 300px;
-    min-height: 500px;
-    scroll-snap-align: start;
-    border-radius: 30px;
+.marquee-track{
     display: flex;
-    flex-flow: column;
-    justify-content: center;
-    align-items: center;
-    padding: 1.5rem;
-    background: var(--color1);
-    box-shadow: 15px 15px 30px rgb(25, 25, 25),
+    flex-flow: row nowrap;
+    width: max-content;
+    animation: marquee 40s linear infinite;
 }
-.card-img{
-    width: 100%;
+.marquee-group{
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: baseline;
+}
+.marquee-item{
+    font-size: 16px;
+    line-height: 2;
+    color: var(--ink);
+    white-space: nowrap;
+    padding: 12px 24px;
+}
+.marquee-mark{
+    color: var(--mute);
+}
 
-    animation: rotate 2s infinite ease both;
-}
-.card-info{
-    font-family: var(--fontText);
-    font-weight: 500;
-    color: wheat;
-    font-size: 2rem;
+/* pausa al pasar el puntero */
+@media(hover: hover) and (pointer: fine){
+    .marquee:hover .marquee-track{
+        animation-play-state: paused;
+    }
 }
 
 /* responsive */
-@media(max-width:1440px){
-    .card{
-        width: 200px;
-        min-height: 400px;
-    }
-    .card-info{
-        font-size: 1.5rem;
+@media(max-width:640px){
+    .marquee-item{
+        font-size: 14px;
+        padding: 10px 16px;
     }
 }
-@media(max-width:1280px){
-    .card-img{
-        width: 80%;
-    }
-}
-@media(max-width:1024px){
-    .card{
-        width: 180px;
-        min-height: 350px;
-    }
-    .card-info{
-        font-size: 1.3rem;
-    }
-}
-@media(max-width:768px){
-    .card{
-        width: 130px;
-        min-height: 350px;
-        justify-content: space-between;
-    }
-    .card-info{
-        font-size: 1.1rem;
-    }
-}
+
+/* movimiento reducido */
 @media(prefers-reduced-motion: reduce){
-    .card-wrapper{
-        scroll-behavior: auto;
+    .marquee-track{
+        animation: none;
+    }
+    .marquee{
+        overflow-x: auto;
     }
 }
 
-/* animaciones */
-
-@keyframes rotate {
-    0%{
-        transform: rotate(0deg);
+/* animacion */
+@keyframes marquee {
+    from{
+        transform: translateX(0);
     }
-    100%{
-        transform: rotate(180deg);
+    to{
+        transform: translateX(-50%);
     }
 }

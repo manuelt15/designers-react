@@ -1,69 +1,57 @@
-# Designers App
+# Designers
 
-A React 19 + Vite web application for managing designer profiles. Users can create, read, update, and delete designer profiles with a modern, responsive interface.
+A React 19 + Vite app for browsing, creating, editing and deleting designer profile cards.
+
+**Visual identity inspired by [OpenCode](https://opencode.ai)** — see [DESIGN.md](DESIGN.md) for the full design system we adapt.
 
 ---
 
 ## Features
 
-- **User Authentication**: Login and registration system
-- **Designer Profiles**: Create, read, update, and delete designer profiles
-- **Pagination**: Browse profiles with 4 items per page
-- **User Notifications**: Beautiful notifications using SweetAlert2
-- **Responsive Design**: Works on all device sizes
-- **Navigation**: React Router for seamless page transitions
+- **Auth**: separate Login (`/`) and Register (`/register`) pages, session kept in `localStorage`
+- **Profiles CRUD**: add, edit and delete designer cards via modals
+- **Grid + pagination**: 4 cards per page, responsive 4 → 2 → 1 columns
+- **Marquee**: infinite scrolling strip of design categories (pauses on hover, respects `prefers-reduced-motion`)
+- **Notifications**: SweetAlert2, themed to match the app (dark surface, ink button)
+- **Accessible**: named inputs, `role="dialog"` modals, keyboard-operable logout, visible focus, reduced-motion support
 
 ---
 
 ## Tech Stack
 
-- [React 19](https://reactjs.org/) with Vite 7
-- [React Router](https://reactrouter.com/) for navigation
-- [SweetAlert2](https://sweetalert2.github.io/) for user notifications
-- CSS with custom properties for theming
+- [React 19](https://react.dev/) + [Vite 7](https://vite.dev/)
+- [React Router 7](https://reactrouter.com/)
+- [SweetAlert2](https://sweetalert2.github.io/)
+- Vanilla CSS with custom properties (no framework)
+- [JetBrains Mono](https://www.jetbrains.com/lp/mono/) — open substitute for Berkeley Mono
 
 ---
 
 ## Getting Started
 
-### Prerequisites
-
-- Node.js 18+ 
-- npm or yarn
-
-### Installation
-
 ```bash
 npm install
+npm run dev        # http://localhost:5173
 ```
 
-### Development
+Other scripts:
 
 ```bash
-npm run dev
+npm run build      # production build to dist/
+npm run preview    # serve the production build
+npm run lint       # eslint
+node --test tests/ # test suite (no framework needed, node:test)
 ```
 
-Starts the development server at `http://localhost:5173`
+### Environment
 
-### Production Build
+Create a `.env` in the root:
 
-```bash
-npm run build
+```env
+VITE_EXPRESS=http://localhost:3000
 ```
 
-Creates optimized build in `dist/` folder
-
-### Preview Production Build
-
-```bash
-npm run preview
-```
-
-### Linting
-
-```bash
-npm run lint
-```
+Points at the Express backend that serves `/users`, `/register` and `/profiles`.
 
 ---
 
@@ -72,19 +60,23 @@ npm run lint
 ```
 src/
 ├── components/
-│   ├── 404/              # Error page
-│   ├── Cabecera/         # Navigation header
-│   ├── CarrouselCards/   # Home page carousel
-│   ├── CarrouselDesigners/ # Profiles grid with pagination
-│   ├── Context/          # React Context (DesignersContext)
-│   ├── DesignersApp/     # Login/Register page
-│   ├── Explore/         # Main CRUD page
-│   ├── Footer/          # Footer component
-│   └── Home/            # Home page
-├── pages/               # Page-level components
-├── App.jsx              # Main app with routing
-├── main.jsx             # Entry point
-└── index.css            # Global styles & CSS variables
+│   ├── 404/                 # not-found page
+│   ├── Cabecera/            # header: text wordmark, home/explore links, [x] logout icon
+│   ├── CarrouselCards/      # category marquee (home)
+│   ├── CarrouselDesigners/  # profile grid, pagination, add-card action
+│   ├── Context/             # DesignerContext: auth, profiles CRUD, modal state
+│   ├── DesignersApp/        # route wrapper for login
+│   ├── Explore/             # profile grid page + add/edit modal
+│   ├── Footer/              # ASCII-marker footer with social links
+│   ├── Home/                # dark TUI-style hero + marquee section
+│   ├── Login/               # login page (OpenCode-style split panel)
+│   └── Register/            # register page (same visual system)
+├── pages/                   # thin page wrappers for the router
+├── App.jsx                  # routes
+├── main.jsx                 # entry
+└── index.css                # global reset + design tokens
+tests/                        # node:test suites (CSS contracts + logic)
+DESIGN.md                     # design system reference (OpenCode adaptation)
 ```
 
 ---
@@ -93,38 +85,54 @@ src/
 
 | Path | Component | Description |
 |------|-----------|-------------|
-| `/` | DesignersApp | Login/Register page |
-| `/home` | Home | Home page with carousel |
-| `/explore` | Explore | Profiles CRUD with pagination |
-| `/not-found` | Error404 | 404 error page |
+| `/` | Login | Sign in |
+| `/register` | Register | Create an account |
+| `/home` | Home | Hero + category marquee |
+| `/explore` | Explore | Designer cards grid + CRUD modals |
+| `/not-found` | Error404 | 404 page |
 
 ---
 
-## Environment Variables
+## Design System
 
-Create a `.env` file in the root directory:
+The UI follows the design system documented in [DESIGN.md](DESIGN.md), adapted from
+OpenCode's marketing site: Berkeley-Mono-style typography on warm cream, hairline
+borders instead of shadows, ASCII bracket markers as icons, and a single dark
+"TUI" surface per page.
 
-```env
-VITE_EXPRESS=http://localhost:your-port
-```
-
----
-
-## CSS Variables
-
-The project uses CSS custom properties for theming:
+Key tokens live in `src/index.css`:
 
 ```css
---colorBase: #000000;      /* Primary background */
---colorBase2: #61696B;     /* Secondary text */
---colorBase3: #FFFFFF;     /* Light text */
---color1: #FF3206;         /* Accent orange */
---color2: #FF5D00;         /* Secondary accent */
---color3: #F98A45;         /* Tertiary accent */
---fontBtn1: "Nunito";      /* Button font */
---fontText: "Roboto";       /* Body text font */
---fontTitu: "Bebas Neue";  /* Title font */
+--fontMono      /* JetBrains Mono stack */
+--canvas        /* #fdfcfc warm cream body */
+--ink           /* #201d1d near-black brand color */
+--surfaceDark   /* #201d1d single dark hero surface */
+--hairline      /* 1px translucent borders */
+--accent / --danger / --warning / --success  /* semantic ramp */
 ```
+
+Rules of thumb: 4px radius on interactive elements, 0 on containers; no box
+shadows; no photos — typography and ASCII glyphs carry the identity.
+
+---
+
+## Testing
+
+Tests run with the Node built-in runner — no test framework dependency:
+
+```bash
+node --test tests/
+```
+
+Suites:
+
+- `responsive.test.mjs` — CSS contracts (in-flow layouts, no artificial heights, form shrink rules)
+- `motion.test.mjs` — explicit transitions, hover gating, reduced-motion, defined tokens
+- `carrousel.test.mjs` — marquee duplication, animation, pause and reduced-motion
+- `auth-pages.test.mjs` — separate login/register pages, no Google, style vocabulary
+- `home-redesign.test.mjs` — header without logo, icon logout, hero composition
+- `explore-redesign.test.mjs` — grid, modal, empty-field validation, style rules
+- `profiles.test.mjs` / `profile-list.test.mjs` — context handlers, loading/error/empty states
 
 ---
 

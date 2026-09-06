@@ -4,16 +4,15 @@ import { DesignerContext } from '../Context/DesignersContext'
 
 export const CarrouselDesigners = ()=> {
 
-const { profilesLoading, profilesError, profilesSaving, getProfiles, profiles , putProfiles , deleteProfiles, currentPage, nextPage, prevPage, itemsPerPage } = useContext(DesignerContext)
+const { profilesLoading, profilesError, profilesSaving, getProfiles, profiles, putProfiles, deleteProfiles, currentPage, nextPage, prevPage, itemsPerPage, setModal } = useContext(DesignerContext)
 
 if(profilesLoading) return <p className="explore-status" role="status">Loading profiles…</p>
 if(profilesError) return (
     <div className="explore-status" role="alert">
-        <p>{profilesError}</p>
-        <button className="pagination-btn" onClick={()=> getProfiles()}>Try again</button>
+        <p>[x] {profilesError}</p>
+        <button className="pagination-btn" onClick={()=> getProfiles()}>try again</button>
     </div>
 )
-if(profiles.length === 0) return <p className="explore-status" role="status">No profiles found</p>
 
 const indexLast = currentPage * itemsPerPage
 const indexFirst = indexLast - itemsPerPage
@@ -22,44 +21,51 @@ const totalPages = Math.ceil(profiles.length / itemsPerPage)
 
     return(
             <>
-                <div className="explore-designers">
+                {profiles.length === 0 && <p className="explore-status" role="status">no profiles yet — add the first one</p>}
+                {profiles.length > 0 && (
+                <div className="designers-grid">
                     {currentProfiles.map(profile =>
-                        <div key={profile._id} className="designers-card">
-                        <div className="designers-info"> 
-                            <img src={profile.src || "/default.jpg"} alt="avatar" className="designers-img" />                           
+                        <article key={profile._id} className="designers-card">
+                            <img src={profile.src || "/default.jpg"} alt={`avatar of ${profile.name}`} className="designers-img" />
                             <div className="designers-data">
-                             <div className="name">{profile.name}</div>   
-                             <div className="name">{profile.age} years</div>   
-                             <div className="name">{profile.design}</div>   
-                             <div className="name">{profile.email}</div>   
-                             <div className="name disp">{profile.disponible ? 'Active ✅' : 'Busy ❌'}</div>  
+                                <span className="field name">{profile.name}</span>
+                                <span className="field">{profile.age} yrs</span>
+                                <span className="field">{profile.design}</span>
+                                <span className="field mail">{profile.email}</span>
+                                <span className={`field disp ${profile.disponible ? 'on' : 'off'}`}>{profile.disponible ? '[+] active' : '[-] busy'}</span>
                             </div>
-                        </div>
-                        <div className="designer-btn">
-                            <button className="card-modify upd" disabled={profilesSaving} onClick={()=> putProfiles(profile._id)}>Update</button>
-                            <button className="card-modify del" disabled={profilesSaving} onClick={()=> deleteProfiles(profile._id)}>Delete</button>
-                        </div>
-                    </div>
+                            <div className="designer-btn">
+                                <button className="card-modify upd" disabled={profilesSaving} onClick={()=> putProfiles(profile._id)}>update</button>
+                                <button className="card-modify del" disabled={profilesSaving} onClick={()=> deleteProfiles(profile._id)}>delete</button>
+                            </div>
+                        </article>
                     )}
                 </div>
+                )}
 
+                <div className="explore-actions">
+                    <button type="button" className="pagination-btn ghost" onClick={()=> setModal('add')}>[+] add your card</button>
+                </div>
+
+                {profiles.length > 0 && (
                 <div className="pagination-container">
-                    <button 
-                        className="pagination-btn prev" 
+                    <button
+                        className="pagination-btn prev"
                         onClick={prevPage}
                         disabled={currentPage === 1}
                     >
-                        Prev
+                        ← prev
                     </button>
                     <span className="pagination-info">{currentPage} / {totalPages}</span>
-                    <button 
-                        className="pagination-btn next" 
+                    <button
+                        className="pagination-btn next"
                         onClick={nextPage}
                         disabled={currentPage === totalPages || totalPages === 0}
                     >
-                        Next
+                        next →
                     </button>
                 </div>
+                )}
             </>
     )
 }

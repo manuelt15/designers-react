@@ -33,18 +33,8 @@ test('Explore: campos encogibles, columnas coherentes y textos largos ajustables
         const form = styles('Explore/Explore.css', '.explore-form', width)
         assert.equal(form['grid-template-columns'], width <= 600 ? 'minmax(0, 1fr)' : 'repeat(2, minmax(0, 1fr))')
         assert.equal(styles('Explore/Explore.css', '.box', width)['min-width'], '0')
-        assert.equal(styles('CarrouselDesigners/CarrouselDesigners.css', '.name', width)['overflow-wrap'], 'anywhere')
-        assert.equal(styles('CarrouselDesigners/CarrouselDesigners.css', '.explore-designers', width).margin, '0')
-    }
-})
-
-test('Carrusel: scroll horizontal disponible también en tablet y tarjetas con snap', () => {
-    for (const width of widths) {
-        const track = styles('CarrouselCards/CarrouselCards.css', '.card-wrapper', width)
-        assert.equal(track['overflow-x'], 'auto', `Scroll bloqueado a ${width}px`)
-        assert.equal(track['scroll-snap-type'], 'x mandatory')
-        assert.equal(styles('CarrouselCards/CarrouselCards.css', '.card', width)['scroll-snap-align'], 'start')
-        assertInFlow(styles('CarrouselCards/CarrouselCards.css', '.card-carrousel', width), 'Carrusel fuera de flujo')
+        assert.equal(styles('CarrouselDesigners/CarrouselDesigners.css', '.field', width)['overflow-wrap'], 'anywhere')
+        assert.equal(styles('CarrouselDesigners/CarrouselDesigners.css', '.designers-grid', width).margin, undefined)
     }
 })
 

@@ -49,8 +49,7 @@ for (const kind of ['network', 'http', 'invalid']) {
         const value = app.render()
         assert.ok(value.profilesError)
         assert.equal(value.profilesLoading, false)
-        assert.equal(value.contador, 0)
-        assert.ok(Array.isArray(value.profiles))
+        assert.equal(value.profiles.length, 0)
     })
 }
 

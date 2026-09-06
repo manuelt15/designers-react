@@ -34,6 +34,11 @@ const [currentPage , setCurrentPage] = useState(1)
 const formPut = useRef()
 const formAdd = useRef()
 
+// modal de add/edit: 'add' | 'edit' | null
+const [modal , setModal] = useState(null)
+const [editingId , setEditingId] = useState('')
+const closeModal = ()=> setModal(null)
+
 // effect de login y prevencion de acceder a otras paginas con local storage
 useEffect(()=>{
     if(!localStorage.login){
@@ -140,24 +145,6 @@ const logOut = ()=> {
     navigate('/')
 }
 
-// stste para card-carrousel
-const [contador , setcontador] = useState(0)
-
-
-// handler next  para arrousel
-const next = ()=>{
-   setcontador(contador + 1)
-   if(contador >= 3){
-    setcontador(0)
-   }
-}
-//handler prev para carrousel
-const prev = ()=>{
-    setcontador(contador - 1 )
-    if(contador <= 0){
-        setcontador(3)
-    }
-}
 
 // handler para pedir profiles
 const getProfiles = useCallback(async (signal)=>{
@@ -179,31 +166,10 @@ const getProfiles = useCallback(async (signal)=>{
     }
 }, [VITE_EXPRESS])
 
-// handler para put profiles
+// handler para put profiles: abre el modal de edicion con el perfil seleccionado
 const putProfiles = (_id)=>{
-    console.log(_id)
-
-    const { identificador, name , age , design , email , disponible , src} = formPut.current
-
-    const find = profiles.find(profile => profile._id === _id)
-    console.log(find)
-    identificador.value = find._id
-    name.value = find.name
-    age.value = find.age
-    design.value = find.design
-    email.value = find.email
-    src.value = find.src
-    disponible.checked = find.disponible
-
-    Swal.fire({
-        icon: 'info',
-        title: 'Edit Mode',
-        text: 'Scroll down to edit the profile in the form below.',
-        background: '#000000',
-        color: '#FFFFFF',
-        confirmButtonColor: '#F98A45',
-        confirmButtonText: 'OK'
-    })
+    setEditingId(_id)
+    setModal('edit')
 }
 
 // handler para act profiles
@@ -212,6 +178,18 @@ const actProfiles = async (e) => {
     if(profileRequest.current) return
 
     const {identificador , name, age, design , email , disponible , src} = formPut.current
+    if(!identificador.value.trim() || !name.value.trim() || !age.value.trim() || !design.value.trim() || !email.value.trim()){
+        Swal.fire({
+            icon: 'warning',
+            title: 'Missing fields',
+            text: 'Name, age, design and email are required.',
+            background: '#201d1d',
+            color: '#FDFCFC',
+            confirmButtonColor: '#201d1d',
+            confirmButtonText: 'OK'
+        })
+        return
+    }
 let actProfile = {
     _id : identificador.value,
     name : name.value,
@@ -244,22 +222,23 @@ profileRequest.current = true
         icon: 'success',
         title: 'Updated!',
         text: 'The profile has been updated successfully.',
-        background: '#000000',
-        color: '#FFFFFF',
-        confirmButtonColor: '#F98A45',
+        background: '#201d1d',
+        color: '#FDFCFC',
+        confirmButtonColor: '#201d1d',
         confirmButtonText: 'OK'
     })
     
     formPut.current.reset()
+    setModal(null)
 } catch (error) {
    console.log(error.message)
    Swal.fire({
         icon: 'error',
         title: 'Error!',
         text: 'Failed to update the profile.',
-        background: '#000000',
-        color: '#FFFFFF',
-        confirmButtonColor: '#F98A45',
+        background: '#201d1d',
+        color: '#FDFCFC',
+        confirmButtonColor: '#201d1d',
         confirmButtonText: 'OK'
      })
  } finally {
@@ -271,9 +250,20 @@ profileRequest.current = true
 const postProfiles = async (e)=>{
     e.preventDefault()
     if(profileRequest.current) return
-    console.log(`Added new profile`)
 
     const {name , age , src , disponible , email, design} = formAdd.current
+    if(!name.value.trim() || !age.value.trim() || !design.value.trim() || !email.value.trim()){
+        Swal.fire({
+            icon: 'warning',
+            title: 'Missing fields',
+            text: 'Name, age, design and email are required.',
+            background: '#201d1d',
+            color: '#FDFCFC',
+            confirmButtonColor: '#201d1d',
+            confirmButtonText: 'OK'
+        })
+        return
+    }
     const newProfile = {
         name : name.value,
         age : age.value,
@@ -304,22 +294,23 @@ const postProfiles = async (e)=>{
             icon: 'success',
             title: 'Created!',
             text: 'New profile has been added successfully.',
-            background: '#000000',
-            color: '#FFFFFF',
-            confirmButtonColor: '#F98A45',
+            background: '#201d1d',
+            color: '#FDFCFC',
+            confirmButtonColor: '#201d1d',
             confirmButtonText: 'OK'
         })
         
         formAdd.current.reset()
+        setModal(null)
     } catch (error) {
         console.log(error.message)
         Swal.fire({
             icon: 'error',
             title: 'Error!',
             text: 'Failed to add the profile.',
-            background: '#000000',
-            color: '#FFFFFF',
-            confirmButtonColor: '#F98A45',
+            background: '#201d1d',
+            color: '#FDFCFC',
+            confirmButtonColor: '#201d1d',
             confirmButtonText: 'OK'
         })
      } finally {
@@ -350,9 +341,9 @@ const deleteProfiles = async (_id)=>{
             icon: 'success',
             title: 'Deleted!',
             text: 'The profile has been deleted successfully.',
-            background: '#000000',
-            color: '#FFFFFF',
-            confirmButtonColor: '#F98A45',
+            background: '#201d1d',
+            color: '#FDFCFC',
+            confirmButtonColor: '#201d1d',
             confirmButtonText: 'OK'
         })
     } catch (error) {
@@ -361,9 +352,9 @@ const deleteProfiles = async (_id)=>{
             icon: 'error',
             title: 'Error!',
             text: 'Failed to delete the profile.',
-            background: '#000000',
-            color: '#FFFFFF',
-            confirmButtonColor: '#F98A45',
+            background: '#201d1d',
+            color: '#FDFCFC',
+            confirmButtonColor: '#201d1d',
             confirmButtonText: 'OK'
         })
     }finally{
@@ -392,7 +383,7 @@ const prevPage = () => {
 
 
 return(
-    <DesignerContext.Provider value={{formLogin , loginUser, setGoodLogin , goodLogin, registerUser, userExist, setUserExist, setUserNew, userNew, formRegister , logOut , next , prev , contador, getProfiles, profilesLoading, profilesError, profilesSaving, profiles , formPut , putProfiles , actProfiles , formAdd , postProfiles , deleteProfiles , noUser , setNoUser, navigate, currentPage, nextPage, prevPage, itemsPerPage}} >
+    <DesignerContext.Provider value={{formLogin , loginUser, setGoodLogin , goodLogin, registerUser, userExist, setUserExist, setUserNew, userNew, formRegister , logOut , getProfiles, profilesLoading, profilesError, profilesSaving, profiles , formPut , putProfiles , actProfiles , formAdd , postProfiles , deleteProfiles , noUser , setNoUser, navigate, currentPage, nextPage, prevPage, itemsPerPage, modal, setModal, closeModal, editingId}} >
         {children}
     </DesignerContext.Provider>
 )

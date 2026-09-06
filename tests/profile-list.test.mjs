@@ -11,7 +11,7 @@ function render(value, component = 'CarrouselDesigners', file = 'CarrouselDesign
     runInNewContext(code, {
         module, exports: module.exports, Fragment: 'fragment',
         element: (type, props, ...children) => ({ type, props: props || {}, children: children.flat() }),
-        require: name => name === 'react' ? { useEffect() {}, useContext: () => ({ profiles: [], currentPage: 1, itemsPerPage: 4, ...value }) } : {},
+        require: name => name === 'react' ? { useEffect() {}, useState: v => [v, () => {}], useContext: () => ({ profiles: [], currentPage: 1, itemsPerPage: 4, ...value }) } : {},
     })
     return module.exports[component]()
 }
@@ -32,7 +32,7 @@ test('Listado: distingue carga, error reintentable y vacío sin paginación 1/0'
     nodes(error).find(node => node.type === 'button').props.onClick()
     assert.equal(retries, 1)
     const empty = render({})
-    assert.match(text(empty), /No profiles found/)
+    assert.match(text(empty), /no profiles yet/)
     assert.ok(!nodes(empty).some(node => node.props.className === 'pagination-container'))
 })
 
@@ -46,8 +46,8 @@ test('Listado: mantiene acciones e imagen de respaldo y bloquea acciones pendien
 })
 
 test('Formularios: campos con nombre accesible y acciones explícitas', () => {
-    for (const component of ['Login', 'Explore']) {
-        const tree = render({goodLogin: true, userNew: true, userExist: true, noUser: true}, component, `${component}/${component}`)
+    for (const [component, value] of [['Login', {goodLogin: true, userNew: true, userExist: true, noUser: true}], ['Explore', {modal: 'add', profilesSaving: false, formAdd: {current: null}, postProfiles: () => {}}]]) {
+        const tree = render(value, component, `${component}/${component}`)
         const inputs = nodes(tree).filter(node => node.type === 'input')
         assert.ok(inputs.length > 0)
         for (const input of inputs) {

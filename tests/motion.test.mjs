@@ -55,6 +55,6 @@ test('Legibilidad: el footer no reduce el texto por debajo de .8rem y Explore us
     const explore = sheets.find(sheet => sheet.file.endsWith('Explore.css')).root
     explore.walkRules(rule => {
         if (rule.selector !== '.box') return
-        rule.walkDecls('color', decl => assert.equal(decl.value, 'var(--colorBase3)'))
+        rule.walkDecls('color', decl => assert.equal(decl.value, 'var(--ink)'))
     })
 })
