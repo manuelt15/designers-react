@@ -10,7 +10,7 @@ A React 19 + Vite app for browsing, creating, editing and deleting designer prof
 
 - **Auth**: separate Login (`/`) and Register (`/register`) pages, session kept in `localStorage`
 - **Profiles CRUD**: add, edit and delete designer cards via modals
-- **Avatars**: pick a random identicon on create (checkbox) or fall back to a default image
+- **Avatars**: pick a random identicon on create (checkbox) or fall back to the default identicon
 - **Grid + pagination**: 4 cards per page, responsive 4 → 2 → 1 columns
 - **Marquee**: infinite scrolling strip of design categories (pauses on hover, respects `prefers-reduced-motion`)
 - **Inline notifications**: auto-expiring ASCII-styled notice banner — no popup library

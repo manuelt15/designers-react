@@ -46,7 +46,7 @@ test('Contexto: postProfiles elige avatar según el checkbox; act conserva src',
     assert.match(src, /avatarRandom/, 'Debe leer avatarRandom del formulario')
     assert.match(src, /avatar-/, 'Debe elegir entre avatares avatar-*.png')
     assert.match(src, /Math\.random/, 'Elección aleatoria')
-    assert.match(src, /src\s*:\s*current\?\.src \|\| ['"]\/default\.jpg['"]/s, 'Al editar conserva el src existente o cae a default')
+    assert.match(src, /src\s*:\s*current\?\.src \|\| ['"]\/default\.png['"]/s, 'Al editar conserva el src existente o cae a default')
 })
 
 test('Grid: src muerto cae a un avatar aleatorio determinístico por id', () => {

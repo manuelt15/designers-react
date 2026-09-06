@@ -39,7 +39,7 @@ test('Listado: distingue carga, error reintentable y vacío sin paginación 1/0'
 test('Listado: mantiene acciones e imagen de respaldo y bloquea acciones pendientes', () => {
     const tree = render({ profiles: [{ _id: 'one', name: 'Test', disponible: true }], profilesSaving: true })
     const image = nodes(tree).find(node => node.type === 'img')
-    assert.equal(image.props.src, '/default.jpg')
+    assert.equal(image.props.src, '/default.png')
     const buttons = nodes(tree).filter(node => node.props.className?.includes('card-modify'))
     assert.equal(buttons.length, 2)
     assert.ok(buttons.every(button => button.props.disabled))

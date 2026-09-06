@@ -200,7 +200,7 @@ let actProfile = {
     age : age.value,
     design : design.value,
     email : email.value,
-    src : current?.src || '/default.jpg',
+    src : current?.src || '/default.png',
     disponible : disponible.checked
 }
  
@@ -248,7 +248,7 @@ const postProfiles = async (e)=>{
     const avatars = ['/avatar-1.png', '/avatar-2.png', '/avatar-3.png', '/avatar-4.png']
     const avatar = avatarRandom.checked
         ? avatars[Math.floor(Math.random() * avatars.length)]
-        : '/default.jpg'
+        : '/default.png'
     const newProfile = {
         name : name.value,
         age : age.value,

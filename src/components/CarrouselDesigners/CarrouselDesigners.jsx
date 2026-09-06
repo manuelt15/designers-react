@@ -4,10 +4,10 @@ import { DesignerContext } from '../Context/DesignersContext'
 
 // avatares disponibles; los src que ya no existan caen a un avatar aleatorio determinístico por id
 const AVATARS = ['/avatar-1.png', '/avatar-2.png', '/avatar-3.png', '/avatar-4.png']
-const KNOWN = new Set([...AVATARS, '/default.jpg'])
+const KNOWN = new Set([...AVATARS, '/default.png'])
 const hash = str => [...str].reduce((acc, ch) => (acc * 31 + ch.charCodeAt(0)) >>> 0, 0)
 const resolveAvatar = profile => {
-    const src = profile.src || '/default.jpg'
+    const src = profile.src || '/default.png'
     if (KNOWN.has(src)) return src
     return AVATARS[hash(profile._id || profile.name || 'x') % AVATARS.length]
 }
