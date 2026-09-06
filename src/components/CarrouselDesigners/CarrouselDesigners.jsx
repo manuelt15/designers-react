@@ -4,7 +4,16 @@ import { DesignerContext } from '../Context/DesignersContext'
 
 export const CarrouselDesigners = ()=> {
 
-const { profiles , putProfiles , deleteProfiles, currentPage, nextPage, prevPage, itemsPerPage } = useContext(DesignerContext)
+const { profilesLoading, profilesError, profilesSaving, getProfiles, profiles , putProfiles , deleteProfiles, currentPage, nextPage, prevPage, itemsPerPage } = useContext(DesignerContext)
+
+if(profilesLoading) return <p className="explore-status" role="status">Loading profiles…</p>
+if(profilesError) return (
+    <div className="explore-status" role="alert">
+        <p>{profilesError}</p>
+        <button className="pagination-btn" onClick={()=> getProfiles()}>Try again</button>
+    </div>
+)
+if(profiles.length === 0) return <p className="explore-status" role="status">No profiles found</p>
 
 const indexLast = currentPage * itemsPerPage
 const indexFirst = indexLast - itemsPerPage
@@ -14,8 +23,8 @@ const totalPages = Math.ceil(profiles.length / itemsPerPage)
     return(
             <>
                 <div className="explore-designers">
-                    {profiles.length === 0 ? (<p>No profiles found</p>) : currentProfiles.map(profile =>
-                        <div key={profile._id} {...profile} className="designers-card">
+                    {currentProfiles.map(profile =>
+                        <div key={profile._id} className="designers-card">
                         <div className="designers-info"> 
                             <img src={profile.src || "/default.jpg"} alt="avatar" className="designers-img" />                           
                             <div className="designers-data">
@@ -27,8 +36,8 @@ const totalPages = Math.ceil(profiles.length / itemsPerPage)
                             </div>
                         </div>
                         <div className="designer-btn">
-                            <button className="card-modify upd" onClick={()=> putProfiles(profile._id)}>Update</button>
-                            <button className="card-modify del" onClick={()=> deleteProfiles(profile._id)}>Delete</button>
+                            <button className="card-modify upd" disabled={profilesSaving} onClick={()=> putProfiles(profile._id)}>Update</button>
+                            <button className="card-modify del" disabled={profilesSaving} onClick={()=> deleteProfiles(profile._id)}>Delete</button>
                         </div>
                     </div>
                     )}

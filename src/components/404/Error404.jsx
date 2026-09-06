@@ -12,7 +12,7 @@ export const Error404 = ()=>{
                 <div className="e404-msj">
                     <div className="e404-number">404</div>
                     <div className="page-not">The page you were lookin for does not exist</div>
-                    <button className="e404-btn"><NavLink to={'/home'}>Back home</NavLink></button>
+                    <NavLink className="e404-btn" to={'/home'}>Back home</NavLink>
                 </div>
             </div>
         </>

@@ -19,7 +19,7 @@ export const Home = ()=>{
                     <p className="app-idea">Not for designers [ but yes ] is —ironically— a space for designers. We bring together creatives from all areas of design to inspire, connect, and collaborate. Here, you can discover talent, showcase your work, or update your profile. We're not your typical designer platform... but yes, we kind of are.</p>
                 </div>
                 
-                <button className="home-btn"><NavLink to={'/explore'}>Explore Designers</NavLink></button>
+                <NavLink className="home-btn" to={'/explore'}>Explore Designers</NavLink>
 
                 <CarrouselCards/>
             </div> 

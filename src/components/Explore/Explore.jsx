@@ -7,11 +7,13 @@ import { CarrouselDesigners } from "../CarrouselDesigners/CarrouselDesigners"
 
 export const Explore = ()=>{
 
-    const {getProfiles , formPut ,actProfiles ,formAdd , postProfiles} = useContext(DesignerContext)
+    const {profilesSaving, getProfiles , formPut ,actProfiles ,formAdd , postProfiles} = useContext(DesignerContext)
 
     useEffect(()=>{
-        getProfiles()
-    },[])
+        const controller = new AbortController()
+        getProfiles(controller.signal)
+        return ()=> controller.abort()
+    },[getProfiles])
 
     return(
        <>
@@ -34,35 +36,35 @@ export const Explore = ()=>{
                 <div className="forms">
                     <h2>Edit your profile</h2>
                 <form  className="explore-form" ref={formPut} onSubmit={actProfiles} >
-                    <input className="box" type="text" name="identificador" placeholder="id" />
-                    <input className="box" type="text" name="name" placeholder="name"/>
-                    <input className="box" type="number" name="age" placeholder="age"/>
-                    <input className="box"type="text" name="design" placeholder="design"/>
-                    <input className="box" type="text" name="email" placeholder="email"/>
-                    <input className="box" type="text" name="src" placeholder="src" />
+                    <input className="box" type="text" name="identificador" aria-label="Profile ID" disabled={profilesSaving} placeholder="id" />
+                    <input className="box" type="text" name="name" aria-label="Name" disabled={profilesSaving} placeholder="name"/>
+                    <input className="box" type="number" name="age" aria-label="Age" disabled={profilesSaving} placeholder="age"/>
+                    <input className="box"type="text" name="design" aria-label="Design specialty" disabled={profilesSaving} placeholder="design"/>
+                    <input className="box" type="text" name="email" aria-label="Email" disabled={profilesSaving} placeholder="email"/>
+                    <input className="box" type="text" name="src" aria-label="Profile image path or URL" disabled={profilesSaving} placeholder="src" />
 
                     <div className="check-box">
-                    <input className="check" type="checkbox" id="disponibleX" name="disponible" />
+                    <input className="check" type="checkbox" id="disponibleX" name="disponible" disabled={profilesSaving} />
                     <label className="check" htmlFor="disponibleX">Select if available</label>
                     </div>
 
-                    <input className="submit" type="submit" />
+                    <input className="submit" type="submit" value={profilesSaving ? "Saving…" : "Save changes"} disabled={profilesSaving} />
                 </form>
                     
                     <h2>Add your profile</h2>
                 <form className="explore-form" ref={formAdd} onSubmit={postProfiles}>
-                    <input className="box" type="text" name="name" placeholder="name"/>
-                    <input className="box" type="number" name="age" placeholder="age"/>
-                    <input className="box"  type="text" name="design" placeholder="design"/>
-                    <input className="box" type="text" name="email" placeholder="email"/>
-                    <input className="box" type="text" name="src" placeholder="src" />
+                    <input className="box" type="text" name="name" aria-label="Name" disabled={profilesSaving} placeholder="name"/>
+                    <input className="box" type="number" name="age" aria-label="Age" disabled={profilesSaving} placeholder="age"/>
+                    <input className="box"  type="text" name="design" aria-label="Design specialty" disabled={profilesSaving} placeholder="design"/>
+                    <input className="box" type="text" name="email" aria-label="Email" disabled={profilesSaving} placeholder="email"/>
+                    <input className="box" type="text" name="src" aria-label="Profile image path or URL" disabled={profilesSaving} placeholder="src" />
 
                    <div className="check-box">
-                   <input className="check" type="checkbox" id="disponibleAdd" name="disponible" />
+                   <input className="check" type="checkbox" id="disponibleAdd" name="disponible" disabled={profilesSaving} />
                    <label className="check" htmlFor="disponibleAdd">Select if available</label>
                    </div>
 
-                    <input className="submit" type="submit" />
+                    <input className="submit" type="submit" value={profilesSaving ? "Saving…" : "Add profile"} disabled={profilesSaving} />
 
                 </form>
                 </div>

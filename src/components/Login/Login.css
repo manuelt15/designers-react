@@ -7,23 +7,27 @@
     min-height: 100vh;
     margin: auto;
     position: relative;
+    isolation: isolate;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-content: start;
+    gap: 3rem;
+    padding: 2rem 5%;
 }
 .logo{
     width: 25%;
-    position: absolute;
-    top: 0%;
-    z-index: 1;
+    grid-column: 1 / -1;
 }
 .fondo-inicio{
     width: 100%;
-    min-height: 100vh;
+    height: 100%;
     position: absolute;
-    top: 0;
-    right: 0;
+    inset: 0;
+    z-index: -1;
 }
 .form-login-wrapper{
-    width: 40%;
-    min-height: 50vh;
+    width: 100%;
+    min-width: 0;
     background: linear-gradient(0deg, rgba(255, 255, 255, 0.211) 100%, rgba(244, 247, 251, 0.321) 100%);
     border-radius: 2.5rem;
     padding: 2rem 2rem;
@@ -33,19 +37,16 @@
     justify-content: space-between;
     align-items: start;
     gap: 1rem;
-    position: absolute;
-    top: 25%;
-    left: 5%;
+
 }
 .form-span{
     font-family: var(--fontTitu);
-    font-size: 5rem;
+    font-size: clamp(2rem, 4vw, 5rem);
     font-weight: 700;
     color: var(--colorBase3);
 }
 .login-form{
     width: 100%;
-    min-height: 25vh;
     display: flex;
     flex-flow: column nowrap;
     justify-content: center;
@@ -57,7 +58,7 @@
     font-family: var(--fontTitu);
     font-size: 2rem;
     font-weight: 400;
-    color: var(--colorBase1);
+    color: var(--colorBase);
 }
 .form-box{
     background: rgba(255, 255, 255, 0.441);
@@ -76,19 +77,21 @@
     width: 25%;
     font-family: var(--fontBtn2);
     text-align: center;
-    color: var(--colorBase1);
+    color: var(--colorBase);
     border-radius: 1rem;
     padding: .7rem;
-    transition: all 0.5s;
+    transition: transform 160ms ease-out, background-color 180ms ease, color 180ms ease;
 }
+@media(hover: hover) and (pointer: fine){
 .submit:hover{
     background-color: var(--color3);
     box-shadow: 0 0 2rem #6fc5ff50;
-    transform: scale(1.1);
+    transform: scale(1.02);
+}
 }
 .submit:active{
     background-color: var(--color1);
-    transition: all 0.25s;
+    transition: transform 160ms ease-out, background-color 180ms ease, color 180ms ease;
     box-shadow: none;
     transform: scale(0.98)
 }
@@ -128,8 +131,8 @@
     gap: 1rem;
 }
 .form-register-wrapper{
-    width: 40%;
-    min-height: 50vh;
+    width: 100%;
+    min-width: 0;
     background: linear-gradient(0deg, rgba(255, 255, 255, 0.211) 100%, rgba(244, 247, 251, 0.321) 100%);
     border-radius: 2.5rem;
     padding: 2rem 2rem;
@@ -139,181 +142,67 @@
     justify-content: space-between;
     align-items: start;
     gap: 1rem;
-    position: absolute;
-    top: 25%;
-    right: 5%;
+
 }
 .mensaje-welcome{
     width: 100%;
     font-family: var(--fontTitu);
-    font-size: 4rem;
+    font-size: clamp(1.3rem, 3vw, 4rem);
     font-weight: 500;
     color: var(--colorBase2);
     line-height: 1;
     text-align: end;
     padding: 2rem;
-    position: absolute;
-    bottom: 5%;
-    right: 5%;
+    grid-column: 1 / -1;
 }
 
 /* responsive */
-@media(max-width:1480px){
-    .inicio{
-      min-height: 150vh;
-    }
-    .fondo-inicio{
-      min-height: 150vh;
-    }
-    .mensaje-welcome{
-      font-size: 2rem;
-    }
+.inicio .app{
+    width: 100%;
+    flex-wrap: wrap;
 }
-@media(max-width:1440px){
-  .inicio{
-    min-height: 150vh;
-  }
-  .fondo-inicio{
-    min-height: 150vh;
-  }
-  .mensaje-welcome{
-    font-size: 2rem;
-  }
+.inicio .app img{
+    width: min(140px, calc((100% - 1rem) / 2));
+}
+.inicio .form-box{
+    width: 100%;
+    max-width: 24rem;
+    min-width: 0;
+}
+.inicio .submit{
+    width: auto;
+    min-width: 7rem;
+    max-width: 100%;
 }
 @media(max-width:1024px){
-    .form-login-wrapper{
-        min-height: 40vh;
-    }
-    .form-register-wrapper{
-        min-height: 40vh;
-    }
-    .form-span{
-        font-size: 3rem;
-    }
-    .app img{
-        width: 30%;
-    }
-    .form-box{
-        width: 80%;
-    }
     .submit{
         width: 50%;
     }
 }
 @media(max-width:768px){
-    .logo{
-        width: 30%;
-    }
     .inicio{
-        min-height: 150vh;
+        grid-template-columns: minmax(0, 1fr);
+        gap: 2rem;
     }
-    .fondo-inicio{
-        min-height: 150vh;
-    }
-    .form-login-wrapper{
-        top: 10%;
-        left: 10%;
-        width: 80%;
-        min-height: 25vh;
-    }
-    .form-register-wrapper{
-      top: 50%;
-      right: 10%;
-      width: 80%;
-      min-height: 25vh;
-
-    }
-    .mensaje-welcome{
-        bottom: 0%;
-        font-size: 2rem;
-    }
-}
-@media(max-width:540px){
-    .inicio{
-        min-height: 200vh;
-    }
-    .fondo-inicio{
-        min-height: 200vh;
-    }
-}
-@media(max-width:430px){
-    .inicio{
-        min-height: 200vh;
-    }
-    .fondo-inicio{
-        min-height: 200vh;
-    }
-    .form-login-wrapper{
-        top: 12%;
-    }
-    .form-register-wrapper{
-        top: 48%;
-    }
-}
-@media(max-width:435px){
     .logo{
         width: 60%;
+        max-width: 300px;
+    }
+    .form-login-wrapper, .form-register-wrapper{
+        padding: 1.5rem;
     }
     .mensaje-welcome{
-        font-size: 1.5rem;
-        bottom: 5%;
-        left: 1%;
-    }
-    .form-box{
-        padding: .5rem;
-    }
-}
-@media(max-width:414px){
-    .form-register-wrapper{
-        top: 45%;
-    }
-}
-@media(max-width:390px){
-    .inicio{
-        min-height: 200vh;
-    }
-    .fondo-inicio{
-        min-height: 200vh;
-    }
-
-}
-@media(max-width:375px){
-    .inicio{
-        min-height: 200vh;
-    }
-
-    .fondo-inicio{
-        min-height: 200vh;
-    }
-    .form-login-wrapper{
-        top: 10%;
-    }
-    .form-register-wrapper{
-        top: 50%;
-    }
-    .mensaje-welcome{
-        bottom: 2%;
-
+        padding: 1rem 0;
     }
 }
 @media(max-width:320px){
-    .form-span{
-        font-size: 2rem;
+    .submit{
+        width: 100%;
     }
     .form-h2{
         font-size: 1.5rem;
     }
-    .form-box{
-        width: 100%;
-    }
-    .submit{
-        width: 100%;
-    }
     .login-form{
         gap: 1.5rem;
-    }
-    .mensaje-welcome{
-        bottom: 3%;
-        font-size: 1.3rem;
     }
 }

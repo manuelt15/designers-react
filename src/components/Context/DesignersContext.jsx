@@ -1,4 +1,4 @@
-import { createContext, useEffect, useRef, useState } from "react";
+import { createContext, useCallback, useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
@@ -21,6 +21,10 @@ const [noUser , setNoUser] = useState(true)
 
 //state para pedir profiles
 const [profiles , setProfiles] = useState([])
+const [profilesLoading, setProfilesLoading] = useState(true)
+const [profilesError, setProfilesError] = useState('')
+const [profilesSaving, setProfilesSaving] = useState(false)
+const profileRequest = useRef(false)
 
 //pagination
 const itemsPerPage = 4
@@ -156,24 +160,24 @@ const prev = ()=>{
 }
 
 // handler para pedir profiles
-const getProfiles = async ()=>{
-
-    let controller = new AbortController()
-    let options = {
-        method : `get`,
-        signal : controller.signal
-      }
-
-      try {
-        let peticion = await fetch(`${VITE_EXPRESS}/profiles` , options)
-      let datos = await peticion.json()
-      setProfiles(datos.data)
-      } catch (error) {
-        next(error)
-      }finally{
-        controller.abort()
-      }  
-}
+const getProfiles = useCallback(async (signal)=>{
+    setProfilesLoading(true)
+    setProfilesError('')
+    try {
+        const peticion = await fetch(`${VITE_EXPRESS}/profiles`, {signal})
+        if(!peticion.ok) throw new Error('Failed to load profiles')
+        const datos = await peticion.json()
+        if(!Array.isArray(datos.data)) throw new Error('Invalid profiles response')
+        if(!signal?.aborted){
+            setProfiles(datos.data)
+            setCurrentPage(page => Math.max(1, Math.min(page, Math.ceil(datos.data.length / itemsPerPage))))
+        }
+    } catch (error) {
+        if(!signal?.aborted) setProfilesError(error.message)
+    } finally {
+        if(!signal?.aborted) setProfilesLoading(false)
+    }
+}, [VITE_EXPRESS])
 
 // handler para put profiles
 const putProfiles = (_id)=>{
@@ -205,6 +209,7 @@ const putProfiles = (_id)=>{
 // handler para act profiles
 const actProfiles = async (e) => {
     e.preventDefault()
+    if(profileRequest.current) return
 
     const {identificador , name, age, design , email , disponible , src} = formPut.current
 let actProfile = {
@@ -226,9 +231,13 @@ let options = {
         "Content-type" : "application/json"
     }
 }
-try {
+profileRequest.current = true
+    setProfilesSaving(true)
+    try {
     let peticion = await fetch(`${VITE_EXPRESS}/profiles` , options)
+        if(!peticion.ok) throw new Error('Profile request failed')
     let datos = await peticion.json()
+        if(!Array.isArray(datos.data)) throw new Error('Invalid profiles response')
     setProfiles(datos.data)
     
     Swal.fire({
@@ -253,11 +262,15 @@ try {
         confirmButtonColor: '#F98A45',
         confirmButtonText: 'OK'
      })
-}
+ } finally {
+        profileRequest.current = false
+        setProfilesSaving(false)
+    }
 }
 // handler para post designers
 const postProfiles = async (e)=>{
     e.preventDefault()
+    if(profileRequest.current) return
     console.log(`Added new profile`)
 
     const {name , age , src , disponible , email, design} = formAdd.current
@@ -278,9 +291,13 @@ const postProfiles = async (e)=>{
             "Content-type" : "application/json"
           }
     }
+    profileRequest.current = true
+    setProfilesSaving(true)
     try {
         let peticion = await fetch(`${VITE_EXPRESS}/profiles` , options)
+        if(!peticion.ok) throw new Error('Profile request failed')
         let datos = await peticion.json()
+        if(!Array.isArray(datos.data)) throw new Error('Invalid profiles response')
         setProfiles(datos.data)
         
         Swal.fire({
@@ -305,11 +322,14 @@ const postProfiles = async (e)=>{
             confirmButtonColor: '#F98A45',
             confirmButtonText: 'OK'
         })
+     } finally {
+        profileRequest.current = false
+        setProfilesSaving(false)
     }
 }
 // handler para delete profiles
 const deleteProfiles = async (_id)=>{
-    console.log(`deleting the profile with id ${_id}`)
+    if(profileRequest.current) return
 
     let controller = new AbortController()
     let options = { 
@@ -317,10 +337,14 @@ const deleteProfiles = async (_id)=>{
         signal : controller.signal 
     }
 
+    profileRequest.current = true
+    setProfilesSaving(true)
     try {
         let peticion = await fetch(`${VITE_EXPRESS}/profiles/${_id}` , options)
+        if(!peticion.ok) throw new Error('Profile request failed')
         let _datos = await peticion.json()
         setProfiles(prev => prev.filter(profile => profile._id !== _id))
+        setCurrentPage(page => Math.max(1, Math.min(page, Math.ceil((profiles.length - 1) / itemsPerPage))))
         
         Swal.fire({
             icon: 'success',
@@ -343,6 +367,8 @@ const deleteProfiles = async (_id)=>{
             confirmButtonText: 'OK'
         })
     }finally{
+        profileRequest.current = false
+        setProfilesSaving(false)
         controller.abort()
     }
 }
@@ -366,7 +392,7 @@ const prevPage = () => {
 
 
 return(
-    <DesignerContext.Provider value={{formLogin , loginUser, setGoodLogin , goodLogin, registerUser, userExist, setUserExist, setUserNew, userNew, formRegister , logOut , next , prev , contador, getProfiles, profiles , formPut , putProfiles , actProfiles , formAdd , postProfiles , deleteProfiles , noUser , setNoUser, navigate, currentPage, nextPage, prevPage, itemsPerPage}} >
+    <DesignerContext.Provider value={{formLogin , loginUser, setGoodLogin , goodLogin, registerUser, userExist, setUserExist, setUserNew, userNew, formRegister , logOut , next , prev , contador, getProfiles, profilesLoading, profilesError, profilesSaving, profiles , formPut , putProfiles , actProfiles , formAdd , postProfiles , deleteProfiles , noUser , setNoUser, navigate, currentPage, nextPage, prevPage, itemsPerPage}} >
         {children}
     </DesignerContext.Provider>
 )

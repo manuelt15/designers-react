@@ -48,9 +48,11 @@
 
     transition: color .5s ease;
 }
+@media(hover: hover) and (pointer: fine){
 .page-not:hover{
     color: var(--color2);
     transition: color .5s ease;
+}
 }
 .e404-btn{
     background-color: var(--color2);
@@ -61,16 +63,18 @@
     border-radius: .9rem;
     padding: .8rem;
     margin: 0 1rem 0 0;
-    transition: all 0.5s;
+    transition: transform 160ms ease-out, background-color 180ms ease, color 180ms ease;
 }
+@media(hover: hover) and (pointer: fine){
 .e404-btn:hover{
     background-color: var(--color3);
     box-shadow: 0 0 20px #6fc5ff50;
-    transform: scale(1.1);
+    transform: scale(1.02);
+}
 }
 .e404-btn:active{
     background-color: var(--color1);
-    transition: all 0.25s;
+    transition: transform 160ms ease-out, background-color 180ms ease, color 180ms ease;
     box-shadow: none;
     transform: scale(0.98);
 }

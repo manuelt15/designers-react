@@ -31,14 +31,16 @@
 .cabecera-li{
     width: fit-content;
     font-family: var(--fontText);
-    color: var(--colorBase2);
+    color: wheat;
     font-size: 1.5rem;
-    transition: all .5s ease;
+    transition: transform 160ms ease-out, background-color 180ms ease, color 180ms ease;
 }
+@media(hover: hover) and (pointer: fine){
 .cabecera-li:hover{
-    scale: 1.2;
+    transform: scale(1.02);
     color: var(--color2);
-    transition: all .5s ease;
+    transition: transform 160ms ease-out, background-color 180ms ease, color 180ms ease;
+}
 }
 .button-cabecera{
     background-color: var(--color2);
@@ -49,16 +51,18 @@
     border-radius: .9rem;
     padding: .8rem;
     margin: 0 1rem 0 0;
-    transition: all 0.5s;
+    transition: transform 160ms ease-out, background-color 180ms ease, color 180ms ease;
 }
+@media(hover: hover) and (pointer: fine){
 .button-cabecera:hover{
     background-color: var(--color3);
     box-shadow: 0 0 20px #6fc5ff50;
-    transform: scale(1.1);
+    transform: scale(1.02);
+}
 }
 .button-cabecera:active{
     background-color: var(--color1);
-    transition: all 0.25s;
+    transition: transform 160ms ease-out, background-color 180ms ease, color 180ms ease;
     box-shadow: none;
     transform: scale(0.98);
 }
@@ -106,3 +110,8 @@
     }
 }
 
+
+.cabecera-li a[aria-current="page"]{
+    text-decoration: underline;
+    text-underline-offset: .3em;
+}

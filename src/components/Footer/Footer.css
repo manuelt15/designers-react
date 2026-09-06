@@ -14,7 +14,7 @@
 }
 .footer-wrapper-one{
     display: flex;
-    flex-flow: row;
+    flex-flow: row wrap;
     justify-content: space-between;
 }
 .footer-logo{
@@ -53,8 +53,14 @@
 
 /* responsive */
 @media(max-width:540px){
+    .footer-logo{
+        width: 100%;
+    }
+    .info{
+        margin: 0 1rem 1rem;
+    }
     .social{
-        font-size: .6rem;
+        font-size: .8rem;
     }
     .footer-logo{
         font-size: 1.2rem;
@@ -62,7 +68,7 @@
 }
 @media(max-width:430px){
     .social{
-        font-size: .5rem;
+        font-size: .8rem;
     }
     .footer-logo{
         font-size: 1.1rem;
@@ -70,12 +76,12 @@
 }
 @media(max-width:425px){
     .social{
-        font-size: .5rem;
+        font-size: .8rem;
     }
 }
 @media(max-width:320px){
     .social{
-        font-size: .5rem;
+        font-size: .8rem;
     }
     .footer-logo{
         font-size: 1rem;

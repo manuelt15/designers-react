@@ -4,7 +4,7 @@
   scroll-behavior : smooth;
 
   --fontBtn1 : "Nunito", sans-serif; 
-  --fontbtn2 : "Open Sans", sans-serif;
+  --fontBtn2 : "Open Sans", sans-serif;
   --fontText : "Roboto", sans-serif;
   --fontTitu : "Bebas Neue", sans-serif;
  
@@ -107,3 +107,20 @@ html {
 }
 
 
+
+/* Foco de teclado y estados de interacción */
+:is(a, button, input, [tabindex]):focus-visible {
+  outline: 3px solid var(--color3);
+  outline-offset: 4px;
+}
+button:disabled, input:disabled {
+  cursor: not-allowed;
+  opacity: .6;
+}
+@media(prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}

@@ -24,13 +24,13 @@ export const Login = ()=>{
                 <span className="form-span">Welcome!</span>
                 <form className='login-form' ref={formLogin} onSubmit={loginUser}>
                 <h2 className="form-h2">Login to your account</h2>
-                <input className='form-box' type="text" name="username" placeholder="username" />
-                <input className='form-box' type="password" name="password" placeholder="password"/>
-                <input className='submit' type="submit" placeholder="Login"/>
+                <input className='form-box' type="text" name="username" aria-label="Username" autoComplete="username" placeholder="username" />
+                <input className='form-box' type="password" name="password" aria-label="Password" autoComplete="current-password" placeholder="password"/>
+                <input className='submit' type="submit" value="Login"/>
                 </form>
-                {!goodLogin && <div class="message-container red">
-                            <p class="form-h3">Failed login 😢</p>
-                            <p class="form-h3">Try again</p>
+                {!goodLogin && <div className="message-container red">
+                            <p className="form-h3">Failed login 😢</p>
+                            <p className="form-h3">Try again</p>
                         </div> }
                 <div className="app">
                 <img src="/appStore.png" alt="logo-app" />
@@ -41,21 +41,21 @@ export const Login = ()=>{
             <span className="form-span">First time?</span>
             <form className='login-form'ref={formRegister} onSubmit={registerUser}>
                 <h2 className="form-h2">Register now for free</h2>
-                <input className='form-box' type="text" name="username" placeholder="username" />
-                <input className='form-box' type="password" name="password" placeholder="password" />
-                <input className='submit' type="submit" placeholder="Register" />
+                <input className='form-box' type="text" name="username" aria-label="Username" autoComplete="username" placeholder="username" />
+                <input className='form-box' type="password" name="password" aria-label="Password" autoComplete="new-password" placeholder="password" />
+                <input className='submit' type="submit" value="Register" />
             </form>
-            {!userNew && <div class="message-container">
-                            <p class="form-h3">Success message ✅</p>
-                            <p class="form-h3">Login now</p>
+            {!userNew && <div className="message-container">
+                            <p className="form-h3">Success message ✅</p>
+                            <p className="form-h3">Login now</p>
                         </div> }
-            {!userExist && <div class="message-container red">
-                            <p class="form-h3">Failed message ❌</p>
-                            <p class="form-h3">User already exist</p>
+            {!userExist && <div className="message-container red">
+                            <p className="form-h3">Failed message ❌</p>
+                            <p className="form-h3">User already exist</p>
                         </div>}
-            {!noUser && <div class="message-container red">
-                            <p class="form-h3">Failed message ❌</p>
-                            <p class="form-h3">No user yet</p>
+            {!noUser && <div className="message-container red">
+                            <p className="form-h3">Failed message ❌</p>
+                            <p className="form-h3">No user yet</p>
                         </div>}            
             <div className="app">
                 <span>🌎 ​🌐 ​👨‍🎨 ​👩‍🎨 👨‍💻​ 🧠​ 🫀​​</span>

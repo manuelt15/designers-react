@@ -1,12 +1,25 @@
-import { useContext, useState } from 'react'
+import { useRef } from 'react'
 import './CarrouselCards.css'
-import { DesignerContext } from '../Context/DesignersContext'
 
 // componente de cards
 export const CarrouselCards = ()=>{
 
-    // exportamos elementos del constexto
-  const {next , prev, contador} = useContext(DesignerContext)
+    const cards = useRef()
+
+    const scrollCards = (direction)=>{
+        const track = cards.current
+        const end = track.scrollWidth - track.clientWidth
+        if(direction > 0 && track.scrollLeft >= end - 1){
+            track.scrollTo({left: 0})
+            return
+        }
+        if(direction < 0 && track.scrollLeft <= 1){
+            track.scrollTo({left: end})
+            return
+        }
+        const step = track.children[1].offsetLeft - track.children[0].offsetLeft
+        track.scrollBy({left: direction * step})
+    }
 
     // array para informacion de las cards
     const info = [
@@ -22,20 +35,16 @@ export const CarrouselCards = ()=>{
         
     return(
         <div className="card-carrousel">
-            <div className="card-wrapper"style={{
-                width: `${info.length * 100 / 5}%`,
-                gridTemplateColumns: `repeat(${info.length} , 1fr)`,
-                transform: `TranslateX(-${(100 / info.length) * contador}%)`
-            }} >
+            <div className="card-wrapper" ref={cards} tabIndex={0} role="region" aria-label="Design categories">
                 {info?.map(inf =>
-                    <div key={inf._id} {...inf} className="card">
+                    <div key={inf._id} className="card">
                         <img src="/star.webp" alt="star" className="card-img" /> 
                         <span key={inf._id} className="card-info">{inf.info}</span>
                     </div>
                 )}
             </div>
-            <button className='card-btn next' onClick={next}>Next</button>
-            <button className='card-btn prev' onClick={prev}>Prev</button>
+            <button className='card-btn next' onClick={()=> scrollCards(1)}>Next</button>
+            <button className='card-btn prev' onClick={()=> scrollCards(-1)}>Prev</button>
         </div>
     )
 }
