@@ -1,6 +1,5 @@
 import { createContext, useCallback, useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Swal from "sweetalert2";
 
 // creamos contexto
 export const DesignerContext = createContext()
@@ -38,6 +37,15 @@ const formAdd = useRef()
 const [modal , setModal] = useState(null)
 const [editingId , setEditingId] = useState('')
 const closeModal = ()=> setModal(null)
+
+// notificacion inline autoexpirable: {kind: 'ok'|'error'|'warn', text}
+const noticeTimer = useRef()
+const [notice , setNoticeState] = useState(null)
+const setNotice = (kind, text)=>{
+    clearTimeout(noticeTimer.current)
+    setNoticeState({kind, text})
+    noticeTimer.current = setTimeout(()=> setNoticeState(null), 4000)
+}
 
 // effect de login y prevencion de acceder a otras paginas con local storage
 useEffect(()=>{
@@ -179,15 +187,7 @@ const actProfiles = async (e) => {
 
     const {identificador , name, age, design , email , disponible , src} = formPut.current
     if(!identificador.value.trim() || !name.value.trim() || !age.value.trim() || !design.value.trim() || !email.value.trim()){
-        Swal.fire({
-            icon: 'warning',
-            title: 'Missing fields',
-            text: 'Name, age, design and email are required.',
-            background: '#201d1d',
-            color: '#FDFCFC',
-            confirmButtonColor: '#201d1d',
-            confirmButtonText: 'OK'
-        })
+        setNotice('warn', 'missing fields — name, age, design and email are required')
         return
     }
 let actProfile = {
@@ -218,29 +218,13 @@ profileRequest.current = true
         if(!Array.isArray(datos.data)) throw new Error('Invalid profiles response')
     setProfiles(datos.data)
     
-    Swal.fire({
-        icon: 'success',
-        title: 'Updated!',
-        text: 'The profile has been updated successfully.',
-        background: '#201d1d',
-        color: '#FDFCFC',
-        confirmButtonColor: '#201d1d',
-        confirmButtonText: 'OK'
-    })
+    setNotice('ok', '[+] profile updated')
     
     formPut.current.reset()
     setModal(null)
 } catch (error) {
    console.log(error.message)
-   Swal.fire({
-        icon: 'error',
-        title: 'Error!',
-        text: 'Failed to update the profile.',
-        background: '#201d1d',
-        color: '#FDFCFC',
-        confirmButtonColor: '#201d1d',
-        confirmButtonText: 'OK'
-     })
+   setNotice('error', '[x] failed to update the profile')
  } finally {
         profileRequest.current = false
         setProfilesSaving(false)
@@ -253,15 +237,7 @@ const postProfiles = async (e)=>{
 
     const {name , age , src , disponible , email, design} = formAdd.current
     if(!name.value.trim() || !age.value.trim() || !design.value.trim() || !email.value.trim()){
-        Swal.fire({
-            icon: 'warning',
-            title: 'Missing fields',
-            text: 'Name, age, design and email are required.',
-            background: '#201d1d',
-            color: '#FDFCFC',
-            confirmButtonColor: '#201d1d',
-            confirmButtonText: 'OK'
-        })
+        setNotice('warn', 'missing fields — name, age, design and email are required')
         return
     }
     const newProfile = {
@@ -290,29 +266,13 @@ const postProfiles = async (e)=>{
         if(!Array.isArray(datos.data)) throw new Error('Invalid profiles response')
         setProfiles(datos.data)
         
-        Swal.fire({
-            icon: 'success',
-            title: 'Created!',
-            text: 'New profile has been added successfully.',
-            background: '#201d1d',
-            color: '#FDFCFC',
-            confirmButtonColor: '#201d1d',
-            confirmButtonText: 'OK'
-        })
+        setNotice('ok', '[+] profile added')
         
         formAdd.current.reset()
         setModal(null)
     } catch (error) {
         console.log(error.message)
-        Swal.fire({
-            icon: 'error',
-            title: 'Error!',
-            text: 'Failed to add the profile.',
-            background: '#201d1d',
-            color: '#FDFCFC',
-            confirmButtonColor: '#201d1d',
-            confirmButtonText: 'OK'
-        })
+        setNotice('error', '[x] failed to add the profile')
      } finally {
         profileRequest.current = false
         setProfilesSaving(false)
@@ -337,26 +297,10 @@ const deleteProfiles = async (_id)=>{
         setProfiles(prev => prev.filter(profile => profile._id !== _id))
         setCurrentPage(page => Math.max(1, Math.min(page, Math.ceil((profiles.length - 1) / itemsPerPage))))
         
-        Swal.fire({
-            icon: 'success',
-            title: 'Deleted!',
-            text: 'The profile has been deleted successfully.',
-            background: '#201d1d',
-            color: '#FDFCFC',
-            confirmButtonColor: '#201d1d',
-            confirmButtonText: 'OK'
-        })
+        setNotice('ok', '[+] profile deleted')
     } catch (error) {
         console.log(error.message)
-        Swal.fire({
-            icon: 'error',
-            title: 'Error!',
-            text: 'Failed to delete the profile.',
-            background: '#201d1d',
-            color: '#FDFCFC',
-            confirmButtonColor: '#201d1d',
-            confirmButtonText: 'OK'
-        })
+        setNotice('error', '[x] failed to delete the profile')
     }finally{
         profileRequest.current = false
         setProfilesSaving(false)
@@ -383,7 +327,7 @@ const prevPage = () => {
 
 
 return(
-    <DesignerContext.Provider value={{formLogin , loginUser, setGoodLogin , goodLogin, registerUser, userExist, setUserExist, setUserNew, userNew, formRegister , logOut , getProfiles, profilesLoading, profilesError, profilesSaving, profiles , formPut , putProfiles , actProfiles , formAdd , postProfiles , deleteProfiles , noUser , setNoUser, navigate, currentPage, nextPage, prevPage, itemsPerPage, modal, setModal, closeModal, editingId}} >
+    <DesignerContext.Provider value={{formLogin , loginUser, setGoodLogin , goodLogin, registerUser, userExist, setUserExist, setUserNew, userNew, formRegister , logOut , getProfiles, profilesLoading, profilesError, profilesSaving, profiles , formPut , putProfiles , actProfiles , formAdd , postProfiles , deleteProfiles , noUser , setNoUser, navigate, currentPage, nextPage, prevPage, itemsPerPage, modal, setModal, closeModal, editingId, notice}} >
         {children}
     </DesignerContext.Provider>
 )

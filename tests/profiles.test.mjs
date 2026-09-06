@@ -17,7 +17,7 @@ function provider(fetch) {
     runInNewContext(code, {
         module, exports: module.exports, fetch, AbortController,
         console: { log() {}, error() {} },
-        setTimeout() {}, localStorage: { login: 'true' },
+        setTimeout() {}, clearTimeout() {}, localStorage: { login: 'true' },
         element: (type, props) => ({ type, props }),
         require: name => name === 'react' ? {
             createContext: () => ({ Provider: 'provider' }),
@@ -76,12 +76,15 @@ function fillForms(value) {
 }
 
 for (const action of ['postProfiles', 'actProfiles', 'deleteProfiles']) {
-    test(`${action}: un error HTTP no se anuncia como éxito`, async () => {
+    test(`${action}: un error HTTP se anuncia inline y no como éxito`, async () => {
         const app = provider(async () => ({ ok: false, json: async () => ({ data: [] }) }))
         const value = app.render()
         fillForms(value)
         await value[action](action === 'deleteProfiles' ? 'one' : { preventDefault() {} })
-        assert.equal(app.alerts.at(-1).icon, 'error')
+        const notice = app.render().notice
+        assert.ok(notice, 'Debe existir notice')
+        assert.equal(notice.kind, 'error')
+        assert.match(notice.text, /failed/)
         assert.equal(app.render().profilesSaving, false)
     })
 }
@@ -109,7 +112,7 @@ test('Profiles: el guardado indica pendiente y bloquea envíos duplicados', asyn
     resolve({ok: true, json: async () => ({data: []})})
     await request
     assert.equal(app.render().profilesSaving, false)
-    assert.equal(app.alerts.at(-1).icon, 'success')
+    assert.equal(app.render().notice.kind, 'ok')
 })
 
 test('Profiles: recargar una lista más corta mantiene una página válida', async () => {

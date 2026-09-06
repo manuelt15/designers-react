@@ -12,7 +12,7 @@ A React 19 + Vite app for browsing, creating, editing and deleting designer prof
 - **Profiles CRUD**: add, edit and delete designer cards via modals
 - **Grid + pagination**: 4 cards per page, responsive 4 → 2 → 1 columns
 - **Marquee**: infinite scrolling strip of design categories (pauses on hover, respects `prefers-reduced-motion`)
-- **Notifications**: SweetAlert2, themed to match the app (dark surface, ink button)
+- **Inline notifications**: auto-expiring ASCII-styled notice banner — no popup library
 - **Accessible**: named inputs, `role="dialog"` modals, keyboard-operable logout, visible focus, reduced-motion support
 
 ---
@@ -21,7 +21,6 @@ A React 19 + Vite app for browsing, creating, editing and deleting designer prof
 
 - [React 19](https://react.dev/) + [Vite 7](https://vite.dev/)
 - [React Router 7](https://reactrouter.com/)
-- [SweetAlert2](https://sweetalert2.github.io/)
 - Vanilla CSS with custom properties (no framework)
 - [JetBrains Mono](https://www.jetbrains.com/lp/mono/) — open substitute for Berkeley Mono
 

@@ -7,7 +7,7 @@ import { CarrouselDesigners } from "../CarrouselDesigners/CarrouselDesigners"
 
 export const Explore = ()=>{
 
-    const {profilesSaving, profiles, getProfiles, formPut, actProfiles, formAdd, postProfiles, modal, closeModal, editingId} = useContext(DesignerContext)
+    const {profilesSaving, profiles, getProfiles, formPut, actProfiles, formAdd, postProfiles, modal, closeModal, editingId, notice} = useContext(DesignerContext)
 
     useEffect(()=>{
         const controller = new AbortController()
@@ -41,6 +41,10 @@ export const Explore = ()=>{
                     <h2 className="section-h2">the designers</h2>
                     <p className="info-p">[+] browse the community · add or edit your card</p>
                 </section>
+
+                {notice && (
+                    <p className={`notice notice-${notice.kind}`} role="status">{notice.text}</p>
+                )}
 
                 <CarrouselDesigners/>
 

@@ -32,6 +32,48 @@
     margin: 0;
 }
 
+/* notificación inline autoexpirable */
+.notice{
+    font-family: var(--fontMono);
+    font-size: 14px;
+    line-height: 2;
+    border: 1px solid var(--hairline);
+    border-radius: 4px;
+    padding: 8px 16px;
+    margin: 0;
+    animation: notice-in 200ms ease-out;
+}
+.notice-ok{
+    color: var(--success);
+    border-color: var(--success);
+    background: var(--surfaceSoft);
+}
+.notice-warn{
+    color: var(--warning);
+    border-color: var(--warning);
+    background: var(--surfaceSoft);
+}
+.notice-error{
+    color: var(--danger);
+    border-color: var(--danger);
+    background: var(--surfaceSoft);
+}
+@keyframes notice-in{
+    from{
+        opacity: 0;
+        transform: translateY(-4px);
+    }
+    to{
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+@media(prefers-reduced-motion: reduce){
+    .notice{
+        animation: none;
+    }
+}
+
 /* estado de carga / error / vacío */
 .explore-status{
     font-family: var(--fontMono);

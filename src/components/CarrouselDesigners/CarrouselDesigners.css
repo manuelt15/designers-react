@@ -143,9 +143,9 @@
     cursor: not-allowed;
 }
 .pagination-btn.ghost{
-    background: transparent;
+    background: var(--surfaceSoft);
     color: var(--ink);
-    border: 1px solid var(--hairlineStrong);
+    border: 1px solid var(--ink);
 }
 @media(hover: hover) and (pointer: fine){
     .pagination-btn.ghost:hover:not(:disabled){

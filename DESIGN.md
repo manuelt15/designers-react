@@ -116,16 +116,12 @@ Buttons keep the tall line-height (2.0) inside a 40px box — calm, spacious lab
 - Pauses on hover (only when `(hover: hover) and (pointer: fine)`).
 - `prefers-reduced-motion: reduce` → no animation, manual horizontal scroll.
 
-### Notifications (SweetAlert2)
-All `Swal.fire` calls share the app theme:
+### Notifications (inline notice)
+No popup library. Operations surface a mono banner under the section header:
 
-```js
-Swal.fire({
-    background: '#201d1d',
-    color: '#FDFCFC',
-    confirmButtonColor: '#201d1d',
-})
-```
+- `.notice-ok` (green), `.notice-warn` (amber), `.notice-error` (red) — all on `--surfaceSoft`, 1px border in the semantic color, 4px radius.
+- Auto-expires after 4s; enters with a 200ms fade+slide (disabled under reduced motion).
+- Copy uses ASCII markers: `[+] profile added`, `[x] failed to update the profile`.
 
 ---
 

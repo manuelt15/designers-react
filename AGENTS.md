@@ -175,7 +175,8 @@ Run `npm run lint` before committing.
 - Uses `currentPage`, `itemsPerPage` (4), `nextPage()`, `prevPage()` from context
 
 ### User Notifications
-- SweetAlert2 for create/update/delete/validation operations (dark theme matching the app)
+- Inline auto-expiring notice banner (`notice` in context: kind ok/warn/error, 4s)
+- No SweetAlert2 — the dependency was removed; do not reintroduce popup libraries
 - Form reset after successful submission
 - Add/Edit live in modals (`role="dialog"`); empty name/age/design/email are rejected before hitting the API
 
@@ -193,5 +194,5 @@ Run `npm run lint` before committing.
 - Uses React 19 with Vite 7
 - Spanish comments exist in existing code (acceptable but English preferred for new code)
 - Tests: node:test + postcss + esbuild (dev deps from Vite)
-- Dependencies: react, react-dom, react-router-dom, sweetalert2
+- Dependencies: react, react-dom, react-router-dom
 - Design system: OpenCode-inspired, tokens in index.css, documented in DESIGN.md
