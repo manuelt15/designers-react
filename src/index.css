@@ -9,6 +9,24 @@
   --fontTitu : "Bebas Neue", sans-serif;
  
 
+  /* sistema OpenCode: mono + crema + hairlines */
+  --fontMono: "JetBrains Mono", "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  --canvas: #fdfcfc;
+  --ink: #201d1d;
+  --inkDeep: #0f0000;
+  --surfaceSoft: #f8f7f7;
+  --surfaceCard: #f1eeee;
+  --surfaceDark: #201d1d;
+  --surfaceDarkElevated: #302c2c;
+  --hairline: rgba(15, 0, 0, 0.12);
+  --hairlineStrong: #646262;
+  --accent: #007aff;
+  --danger: #ff3b30;
+  --warning: #ff9f0a;
+  --success: #30d158;
+  --ash: #9a9898;
+  --mute: #646262;
+
   --colorBase: #000000;
   --colorBase2 : #61696B;
   --colorBase3 : #FFFFFF;

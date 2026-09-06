@@ -1,68 +1,39 @@
 import { useContext, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import './Login.css'
 import { DesignerContext } from '../Context/DesignersContext'
 
-// componente del login
+// pagina de login (sistema OpenCode: mono, crema, panel oscuro unico)
 export const Login = ()=>{
 
-    // importamos elementos del contexto
-    const {formLogin , loginUser,  goodLogin ,setGoodLoging, userNew, setUserNew, registerUser, userExist, setUserExist, formRegister , navigate , noUser} = useContext(DesignerContext)
+    const {formLogin, loginUser, goodLogin, navigate} = useContext(DesignerContext)
 
-    // effect para login
     useEffect(()=>{
         if(localStorage.login){
             navigate('/home')
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps -- una sola comprobación al montar
     },[])
 
     return(
-        <>
-         <div className="inicio">
-            <img src="/logo.png" alt="" className="logo" />
-            <img src="/fondoF.jpg" alt="fondo" className="fondo-inicio" />
-            <div className="form-login-wrapper">
-                <span className="form-span">Welcome!</span>
-                <form className='login-form' ref={formLogin} onSubmit={loginUser}>
-                <h2 className="form-h2">Login to your account</h2>
-                <input className='form-box' type="text" name="username" aria-label="Username" autoComplete="username" placeholder="username" />
-                <input className='form-box' type="password" name="password" aria-label="Password" autoComplete="current-password" placeholder="password"/>
-                <input className='submit' type="submit" value="Login"/>
+        <main className="auth-page">
+            <div className="auth-shell">
+                <aside className="auth-panel" aria-hidden="true">
+                    <pre className="auth-wordmark">█▄░█ █▀▀ █▀▀▄
+█░▀█ ██▄ █▄▄▀</pre>
+                    <p className="auth-prompt">~ designers <span className="cmd">--explore</span></p>
+                    <p className="auth-hints">tab switch · ctrl-p commands</p>
+                </aside>
+                <form className="auth-form" ref={formLogin} onSubmit={loginUser}>
+                    <h1 className="auth-title">Sign in</h1>
+                    <p className="auth-alt">or <Link to="/register">create an account</Link></p>
+                    <input className="auth-input" type="text" name="username" aria-label="Username" autoComplete="username" placeholder="username" />
+                    <input className="auth-input" type="password" name="password" aria-label="Password" autoComplete="current-password" placeholder="password" />
+                    {!goodLogin && <p className="auth-msg">[x] Failed login — try again</p>}
+                    <input className="auth-submit" type="submit" value="Sign in" />
+                    <p className="auth-note">Not for designers [ but yes ]. Get inspired, find your style.</p>
                 </form>
-                {!goodLogin && <div className="message-container red">
-                            <p className="form-h3">Failed login 😢</p>
-                            <p className="form-h3">Try again</p>
-                        </div> }
-                <div className="app">
-                <img src="/appStore.png" alt="logo-app" />
-                <img src="/googlePlay.png" alt="logo-app" />
-                </div>
             </div>
-        <div className="form-register-wrapper">
-            <span className="form-span">First time?</span>
-            <form className='login-form'ref={formRegister} onSubmit={registerUser}>
-                <h2 className="form-h2">Register now for free</h2>
-                <input className='form-box' type="text" name="username" aria-label="Username" autoComplete="username" placeholder="username" />
-                <input className='form-box' type="password" name="password" aria-label="Password" autoComplete="new-password" placeholder="password" />
-                <input className='submit' type="submit" value="Register" />
-            </form>
-            {!userNew && <div className="message-container">
-                            <p className="form-h3">Success message ✅</p>
-                            <p className="form-h3">Login now</p>
-                        </div> }
-            {!userExist && <div className="message-container red">
-                            <p className="form-h3">Failed message ❌</p>
-                            <p className="form-h3">User already exist</p>
-                        </div>}
-            {!noUser && <div className="message-container red">
-                            <p className="form-h3">Failed message ❌</p>
-                            <p className="form-h3">No user yet</p>
-                        </div>}            
-            <div className="app">
-                <span>🌎 ​🌐 ​👨‍🎨 ​👩‍🎨 👨‍💻​ 🧠​ 🫀​​</span>
-            </div>
-        </div>
-            <div className="mensaje-welcome">Get inspired, find your style, and take your ideas to the next level_</div>
-        </div>
-        </>
+        </main>
     )
 }

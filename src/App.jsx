@@ -2,6 +2,7 @@ import './App.css'
 import {BrowserRouter, Routes, Route, Navigate} from 'react-router-dom'
 import { DesignerProvider } from './components/Context/DesignersContext'
 import { DesignersApp } from './components/DesignersApp/DesignersApp'
+import { Register } from './components/Register/Register'
 import { Home } from './components/Home/Home'
 import { Explore } from './components/Explore/Explore'
 import { Error404 } from './components/404/Error404'
@@ -18,6 +19,7 @@ function App() {
     <>
     <Routes>
       <Route path='/' element={<DesignersApp/>}/>
+      <Route path='/register' element={<Register/>}/>
       <Route path='/home' element={<Home/>}/>
       <Route path='/explore' element={<Explore/>}/>
       <Route path='/not-found' element={<Error404/>}/>
